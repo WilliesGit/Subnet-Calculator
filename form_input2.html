@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IPv4 + CIDR/Subnet Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#e5e7eb; --panel:#ffffffcc; --edge:#e5e7eb; --text:#0f172a;
+    --muted:#6b7280; --blue:#3b82f6; --ring:#dbeafe; --shadow:0 10px 24px rgba(15,23,42,.08);
+  }
+  html,body {margin:0;background:var(--bg);font-family:Montserrat,sans-serif;color:var(--text);}
+  .wrap {min-height:100vh;display:grid;place-items:center;padding:6vh 2vw;}
+  .panel {
+    width:min(900px,95vw);background:var(--panel);backdrop-filter:blur(6px);
+    border:1px solid var(--edge);border-radius:16px;box-shadow:var(--shadow);padding:22px;
+  }
+
+  /* flex row for inputs and button with spacing */
+  .form-row {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* ✅ space between segments and button */
+  }
+
+  .segments {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    transition: border-color .18s, box-shadow .18s;
+    width: 80%; /* expand but leave space for the button */
+  }
+  .segments:focus-within {border-color:var(--blue);box-shadow:0 0 0 3px var(--ring);}
+  .seg {
+    width:64px;text-align:center;padding:10px 8px;font-size:1.08rem;font-weight:600;
+    border:1px solid #e5e7eb;border-radius:10px;outline:0;
+    transition:border-color .18s, box-shadow .18s;
+  }
+  .seg:focus {border-color:var(--blue);box-shadow:0 0 0 2px var(--ring);}
+  .dot, .slash {
+    width:10px;display:flex;align-items:center;justify-content:center;
+    color:var(--muted);user-select:none;
+  }
+  .cidr-seg {
+    width:160px; /* Large enough for subnet mask */
+    text-align:center;padding:11px 10px;font-size:1.05rem;font-weight:600;
+    border:1px solid #e5e7eb;border-radius:10px;outline:none;
+    transition:border-color .18s, box-shadow .18s;
+  }
+  .cidr-seg:focus {border-color:var(--blue);box-shadow:0 0 0 2px var(--ring);}
+  .btn {
+    background: linear-gradient(180deg, #3b82f6, #2563eb);
+    color: #fff;
+    border: 0;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(37,99,235, .35);
+  }
+  .hint {margin-top:10px;color:#475569;font-size:.92rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form class="panel" autocomplete="off">
+    <div class="form-row">
+      <div class="segments" aria-label="IPv4 address">
+        <input class="seg" type="text" inputmode="numeric" maxlength="3" placeholder="192">
+        <span class="dot">.</span>
+        <input class="seg" type="text" inputmode="numeric" maxlength="3" placeholder="168">
+        <span class="dot">.</span>
+        <input class="seg" type="text" inputmode="numeric" maxlength="3" placeholder="1">
+        <span class="dot">.</span>
+        <input class="seg" type="text" inputmode="numeric" maxlength="3" placeholder="10">
+        <span class="slash">/</span>
+        <input class="cidr-seg" type="text" placeholder="24 or 255.255.255.0">
+      </div>
+      <button class="btn" type="submit">Calculate</button>
+    </div>
+    <p class="hint">Enter IPv4 + either CIDR (/24) or a full subnet mask (255.255.255.0).</p>
+  </form>
+</div>
+
+<script>
+  const ipInputs = document.querySelectorAll('.seg');
+  const cidrInput = document.querySelector('.cidr-seg');
+
+  // Auto-advance and backspace between octets
+  ipInputs.forEach((input, idx) => {
+    input.addEventListener('input', e => {
+      let val = e.target.value.replace(/\D/g, '');
+      if (val > 255) val = 255; 
+      e.target.value = val;
+      if (val.length === 3 && idx < ipInputs.length - 1) {
+        ipInputs[idx + 1].focus();
+      }
+    });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+        ipInputs[idx - 1].focus();
+      }
+    });
+  });
+
+  // CIDR/Subnet smart behaviour
+  cidrInput.addEventListener('input', e => {
+    let val = e.target.value.trim();
+    if (/^\d{1,2}$/.test(val)) {
+      let num = parseInt(val,10);
+      if (num > 32) num = 32;
+      e.target.value = '/' + num;
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+/* Scrollable container */
+.table-wrapper {
+  max-height: 320px;              /* adjust height as needed */
+  overflow-y: auto;               /* vertical scroll only */
+  border: 1.5px solid #dcdedf;
+  border-radius: 0.75rem;
+  margin-top: 1.1rem;
+  padding: 0rem 2rem 0rem 2rem; /* top padding for spacing */
+
+}
+
+/* ===== Custom Scrollbar Styling (adapted from sidebar-scroll) ===== */
+.table-wrapper::-webkit-scrollbar {
+  width: 8px; /* thin scrollbar */
+}
+
+.table-wrapper::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: transparent; /* optional: could also be #f5f6f7 for light bg */
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #9ca3af; /* light gray thumb */
+  border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280; /* darker hover */
+}
+
+
+
+
+/* Table style */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Montserrat', sans-serif;
+  min-width: 600px; /* optional to maintain layout */
+  
+}
+
+.table th,
+.table td {
+  padding: 18px 23px;
+  border-bottom: 1px solid #dcdedf;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+/* Sticky header styling */
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* Alternate row shading for readability */
+.table tbody tr:nth-child(even) {
+  background-color: #f5f6f7;
+}
+
+/* Hover effect for rows */
+.table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Clear button */
+.clear-btn {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  color: #fff;
+  border: 0;
+  border-radius: 0.20rem;
+  padding: 14px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(37,99,235,.35);
+}

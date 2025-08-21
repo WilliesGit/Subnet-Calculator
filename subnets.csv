@@ -1,0 +1,5 @@
+Subnet Index,Network Address,Prefix Length,Usable Hosts
+1,192.168.72.0,26,62
+2,192.168.72.64,27,30
+3,192.168.72.96,27,30
+4,192.168.72.128,28,14
