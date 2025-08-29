@@ -20,6 +20,8 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* same as your header height */
 }
 
 /* Header styling */
@@ -85,6 +87,16 @@ nav a::after {
 
 nav a:hover::after {
     width: 100%;
+}
+
+/*nav a.active {
+    font-weight: 600; Bold for active link 
+}
+*/
+
+nav a.active::after {
+    width: 100%;
+    background-color: currentColor; /* underline for active link */
 }
 
 /* Main container styling */
@@ -281,6 +293,8 @@ p {
     background-color: #dcdedf; /* Light gray */
     margin-top: 1rem;
     padding: 1rem;
+    box-shadow: 0 4px 12px rgba(220,222,223,0.3), 0 8px 24px rgba(220,222,223,0.18);
+
     
 }
 
@@ -301,6 +315,37 @@ p {
     font-weight: 600;
     color: #1f2937; /* Dark gray */
 }
+
+.placeholder-content-other {
+    /*height: auto;  384px */
+    min-height: 85vh;
+    background-color: #e5e7eb; /* Light gray */
+    margin-top: 1rem;
+    padding: 1rem;
+    display: none; /* Hidden by default */
+    
+}
+
+.placeholder-content-other.active {
+  display: block; /* Show only the active section */
+}
+
+
+.placeholder-content-other h2 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    color: #1f2937; /* Dark gray */
+}
+
+.placeholder-content-other p{
+  width: 30rem;
+  text-align: justify;
+ 
+}
+
+
+
+
 
 
 /* =========================
