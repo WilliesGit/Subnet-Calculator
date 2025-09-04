@@ -117,9 +117,11 @@ aside {
     top: 4rem; /* SAME as your header height! */
     align-self: flex-start;    /* Don't stretch full page */
     padding-top: 2rem;         /* Padding from header */
+    padding-bottom: 2rem;
     /* Padding left/right optional for more spacing:
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    Padding goes anti-clock wise: top, right, bottom left
     */
     
 }

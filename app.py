@@ -26,13 +26,12 @@ def ValidateIP(ip_address):
     except ValueError:
         raise ValueError(f"Invalid IP address: {ip_address}")
 
-
-def ParseSubnet(subnet_mask, ip_version=4):
-  # Handle CIDR with or without leading '/'
+def IPv4ParseSubnet(subnet_mask, ip_version=4):
     if isinstance(subnet_mask, str) and subnet_mask.startswith('/'):
         subnet_mask = subnet_mask[1:] 
 
     if ip_version == 4:
+        #Checks if subnet_mask is in CIDR notation (a number like 24) for IPv4
         if re.match(r'^\d{1,2}$', subnet_mask):
             prefix = int(subnet_mask)
             if 0 <= prefix <= 32:
@@ -40,16 +39,38 @@ def ParseSubnet(subnet_mask, ip_version=4):
             raise ValueError(f"IPv4 CIDR prefix must be between 0 and 32: {subnet_mask}")
         try:
             mask = ipaddress.IPv4Address(subnet_mask)
-            return bin(int(mask)).count('1')
+            return bin(int(mask)).count('1') #Converts subnet mask into into subnet prefix 
         except ValueError:
             raise ValueError(f"Invalid IPv4 subnet mask: {subnet_mask}")
+    else:
+        raise ValueError(f'Invalid IPv4 version. Must be an IPv4 Address')
+
+def ParseSubnet(subnet_mask, ip_version=4):
+    """ Convert a subnet mask to CIDR prefix length for IPv4 or IPv6."""
+  # Handle CIDR with or without leading '/'
+    if isinstance(subnet_mask, str) and subnet_mask.startswith('/'):
+        subnet_mask = subnet_mask[1:] 
+
+    if ip_version == 4:
+        #Checks if subnet_mask is in CIDR notation (a number like 24) for IPv4
+        if re.match(r'^\d{1,2}$', subnet_mask):
+            prefix = int(subnet_mask)
+            if 0 <= prefix <= 32:
+                return prefix
+            raise ValueError(f"IPv4 CIDR prefix must be between 0 and 32: {subnet_mask}")
+        try:
+            mask = ipaddress.IPv4Address(subnet_mask)
+            return bin(int(mask)).count('1') #Converts subnet mask into into subnet prefix 
+        except ValueError:
+            raise ValueError(f"Invalid IPv4 subnet mask: {subnet_mask}")
+        
     elif ip_version == 6:
         if re.match(r'^\d{1,3}$', subnet_mask):
             prefix = int(subnet_mask)
             if 0 <= prefix <= 128:
                 return prefix
             raise ValueError(f"IPv6 CIDR prefix must be between 0 and 128: {subnet_mask}")
-        raise ValueError(f"IPv6 subnet mask must be in CIDR notation 64: {subnet_mask}")
+        raise ValueError(f"IPv6 subnet mask must be in CIDR notation (0-128)): {subnet_mask}")
     raise ValueError(f"Unsupported IP version: {ip_version}")
 
 
@@ -94,6 +115,47 @@ def Find_Prefix(hosts, ip_version=4):
     if prefix < 0:
         raise ValueError(f"Too many hosts ({hosts}) for IPv{ip_version}")
     return prefix
+
+
+
+def IPv4Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version=4):
+    #Validate input for IPv4 Address
+    try:
+        ip_address = ipaddress.ip_address(ip_address)
+        if ip_address.version != 4:
+            raise ValueError("Only IPv4 addresses are supported, not IPv6")
+    except ValueError as e:
+        raise ValueError(f"Invalid IPv4 address: {ip_address} ")
+    
+    network = ipaddress.ip_network(f"{ip_address}/{subnet_mask}", strict=False)
+    ip_version = network.version
+    subnets = []
+
+    try:
+        if not isinstance(no_of_hosts, int) or no_of_hosts <=0:
+            raise ValueError("Host input must be an integer (fixed-length)")
+        
+      
+        new_prefix = Find_Prefix(no_of_hosts, ip_version)
+        if new_prefix < network.prefixlen:
+            raise ValueError(f"New prefix {new_prefix} must be greater than or equal to the original prefix {network.prefixlen}")
+        subnets_prefix = network.subnets(new_prefix=new_prefix)
+
+        for index, subnet in enumerate(subnets_prefix, start=1):
+            subnet_addr = str(subnet.network_address)
+
+            subnets.append({
+                'subnet': f"Subnet {index}",  # For table
+                'network': f"{str(NetAddr(subnet_addr, new_prefix))}/{new_prefix}",
+                'broadcast': str(BroadAddr(subnet_addr, new_prefix)),
+                'first': str(FirstAddr(subnet_addr, new_prefix)),
+                'last': str(LastAddr(subnet_addr, new_prefix))
+            })
+               
+    except ValueError as e:
+        return {'error': str(e)}
+    
+    return {'subnets': subnets, 'total': len(subnets)}
 
 
 def Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version=4):
@@ -295,6 +357,28 @@ def ip_info():
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
 
+@app.route('/api/IPv4subnet', methods=['POST'])
+def IPv4subnet():
+    data = request.json
+    try:
+        ip_address = data['ip_address']
+        subnet_mask = data['subnet_mask']
+        no_of_hosts = data['no_of_hosts']
+        ip_version = data['ip_version']
+       
+        try:
+            no_of_hosts = int(no_of_hosts)
+            if no_of_hosts <=0:
+                raise ValueError("Number of hosts must be a positive integer")
+        except (ValueError, TypeError):
+            raise ValueError("Number of hosts must be a positive integer")
+
+        subnets = IPv4Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version)
+
+        return jsonify(subnets), 200
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+
 
 @app.route('/api/subnet', methods=['POST'])
 def subnet():
@@ -316,7 +400,9 @@ def subnet():
             no_of_hosts = host_counts
         else:
             no_of_hosts = int(no_of_hosts)
+
         subnets = Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version)
+
         return jsonify(subnets), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
