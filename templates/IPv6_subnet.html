@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subnet Calculator</title>
+
+  <!-- Tailwind (if using utility classes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Main site styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <!-- Table styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-container">
+      <h1>Subnet Calculator</h1>
+      <nav>
+        <a href="#how-it-works">How it works</a>
+        <a href="#why-use-it">Why use it</a>
+        <a href="#features">Features</a>
+        <a href="#tips">Tips</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <div class="main-container">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside>
+      <div class="sidebar-scroll">
+        <ul id="sidebar-menu">
+          <li class="sidebar-item">
+            <a href="/">
+              <span class="sidebar-icon lock"></span>
+              <div class="item-title-container">
+                <div class="item-title">IP Information</div>
+                <div class="item-subtitle">View IP details for IPv4 and IPv6</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="sidebar-item">
+            <a href="/ipv4_calculator">
+              <span class="sidebar-icon server"></span>
+              <div class="item-title-container">
+                <div class="item-title">IPv4 Calculator</div>
+                <div class="item-subtitle">Generate IPv4 subnets and view address details.</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="sidebar-item active">
+            <a href="/ipv6_calculator">
+              <span class="sidebar-icon server"></span>
+              <div class="item-title-container">
+                <div class="item-title">IPv6 Calculator</div>
+                <div class="item-subtitle">Generate IPv6 subnets and view address details.</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="sidebar-item">
+            <a href="randomIP">
+              <span class="sidebar-icon slash"></span>
+              <div class="item-title-container">
+                <div class="item-title">Random IP Generation</div>
+                <div class="item-subtitle">Generate Random IPv4 and IPv6 Addresses</div>
+              </div>
+            </a>
+          </li>
+
+          <li class="sidebar-item">
+            <a href="/vlsm_calculator">
+              <span class="sidebar-icon server"></span>
+              <div class="item-title-container">
+                <div class="item-title">Variable Length Calculation</div>
+                <div class="item-subtitle">Generate subnets of different sizes for IPv4 and IPv6 networks.</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+      <section class="placeholder-content">
+        <div class = "placeholder-content-title">
+        <h2>IPv6 Subnet Calculator</h2>
+        <p>Enter an IPv6 address and CIDR notation to calculate subnets</p>
+        </div>
+
+        <!-- ===== FORM START ===== -->
+        <div class="wrap">
+          <form class="panel" autocomplete="off">
+            <div class="form-row">
+
+              <!-- Segments block -->
+              <!-- Segments block -->
+              <div class="segments" aria-label="IPv4 address">
+                <input class="seg" type="text" placeholder="2001:db8::8a2e:370:7334">
+                <span class="slash">/</span>
+                <input class="cidr-seg" type="text" placeholder="64">
+                <input class="hosts-seg" type="text" placeholder="1000">
+              </div>
+
+              <!-- Submit button -->
+              <button class="btn" type="submit">Calculate</button>
+            </div>
+
+            <p class="hint">Enter IPv6 + CIDR (/64) Also specify number of hosts (1000 or 2000)</p>
+          </form>
+        </div>
+        <!-- ===== FORM END ===== -->
+
+        <div class="table-actions">
+            <button class="btn-export">Export CSV</button>
+        </div>
+
+        <!-- ===== OUTPUT TABLE ===== -->
+         <div class="table-wrapper">
+          
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Subnets</th>
+                    <th>Network Address</th>
+                    <th>First Address</th>
+                    <th>Last Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Subnet 1</td>
+                    <td>2001:db8::/64</td>
+                    <td>2001:db8::1</td>
+                    <td>2001:db8::ffff:ffff:ffff:ffff</td>
+                </tr>
+            
+                
+                <!-- Repeat rows for VLSM results -->
+                </tbody>
+            </table>
+            <!--<button class="clear-btn" type="">Clear</button>
+            </div> -->
+        <!-- ===== OUTPUT TABLE END ===== -->
+
+      </section>
+
+      <!-- Additional placeholders for spacing / content -->
+      <div class="placeholder-content-other" id="how-it-works">
+        <div class = "placeholder-content-title">
+        <h2>How It Works</h2>
+        <div class="text-content">
+        <p>Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details. Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details</p>
+        </div>
+        </div>
+      </div>
+      <div class="placeholder-content-other" id="why-use-it">
+        <div class = "placeholder-content-title">
+        <h2>Why Use It</h2>
+        <p>Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details. Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details</p>
+        </div>
+      </div>
+
+      <div class="placeholder-content-other" id="features">
+        <div class = "placeholder-content-title">
+        <h2>Features</h2>
+        <p>Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details. Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details</p>
+        </div>
+      </div>
+
+       <div class="placeholder-content-other" id="tips">
+        <div class = "placeholder-content-title">
+        <h2>Tips</h2>
+        <p>Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details.Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details. Enter an IPv4 address and either CIDR notation or a full subnet mask to calculate network details</p>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ===== JS Scripts ===== -->
+  <script src="{{ url_for('static', filename='subnetIP6.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+/* =========================
+   1. ROOT VARIABLES & BODY
+========================= */
+:root {
+  --bg:#e5e7eb;
+  --panel:#ffffffcc;
+  --edge: #c6c6c9; /* Light border for card effect */
+  --text:#0f172a;
+  --muted:#6b7280;
+  --blue:#3b82f6;
+  --ring:#dbeafe;
+  --shadow:0 10px 24px rgba(15,23,42,.08);
+}
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* same as your header height */
+}
+
+/* Header styling */
+header {
+    background-color: #e5e7eb; /* Light gray */
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 5rem;
+     /* Add subtle shadow */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    gap: 1rem; /* reduce spacing between h1 and nav */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 5vw;   /* Add as much as you want : view width*/
+    padding-right: 5vw;  /* Or use padding-inline: 3vw; */
+}
+
+header h1 {
+    font-size: 1.2rem; /* 18px */
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Nav container styling */
+nav {
+    display: flex;
+    gap: 2rem;
+}
+
+/* Nav links */
+nav a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;  /* ~19px */
+    font-weight: 400;
+    text-decoration: none;
+    color: inherit; /* inherits color from parent (removes forced gray) */
+    position: relative; /* for custom underline */
+    padding-bottom: 2px;
+}
+
+/* Underline effect on hover */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/*nav a.active {
+    font-weight: 600; Bold for active link 
+}
+*/
+
+nav a.active::after {
+    width: 100%;
+    background-color: currentColor; /* underline for active link */
+}
+
+/* Main container styling */
+.main-container {
+    background-color: #e5e7eb; /* Light gray */
+    display: flex;
+    flex: 1;
+    padding-left: 6vw;   /* Add as much as you want : view width*/
+    padding-right: 6vw;  /* Or use padding-inline: 3vw; */
+}
+
+/* Sidebar container */
+aside {
+    width: 18rem; /* 256px */
+    background-color: #e5e7eb;
+    color: #1f2937;
+    position: sticky; /* stick while scrolling main */
+    top: 4rem; /* SAME as your header height! */
+    align-self: flex-start;    /* Don't stretch full page */
+    padding-top: 2rem;         /* Padding from header */
+    padding-bottom: 2rem;
+    /* Padding left/right optional for more spacing:
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    Padding goes anti-clock wise: top, right, bottom left
+    */
+    
+}
+
+/* Sidebar scroll area: independent scrolling */
+.sidebar-scroll {
+    max-height: calc(100vh - 4rem - 2rem); /* viewport - header - padding */
+    overflow-y: auto;
+    padding-right: 2px;    /* prevent scrollbar overlay */
+    
+    
+}
+
+/* Target the custom scroll area, e.g. sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 8px; /* thin scrollbar (adjust as you like) */
+}
+
+/* Hide arrows (buttons) */
+.sidebar-scroll::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+}
+
+/* Track styling */
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent; /* or any color */
+}
+
+/* Thumb styling */
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background-color: #9ca3af; /* light gray thumb */
+  border-radius: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280; /* darker on hover */
+}
+
+/* Sidebar list */
+ul#sidebar-menu {
+    list-style: none;
+    padding: 0;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Sidebar item box style */
+.sidebar-item {
+    border-left: 8px solid transparent; /* Blue for active/hover only */
+    background-color: #e5e7eb; /* Slightly whiter than page bg for visible box */
+    
+    box-shadow: 0 2px 8px rgba(60, 60, 60, 0.08); /* Soft card shadow */
+    border: 1.5px solid #c6c6c9; /* Light border for card effect */
+    transition: border-left 0.3s, box-shadow 0.3s ;
+    margin: 0 0.25rem;        /* Space between box and sidebar edge */
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+    border-left-color: #3b82f6; /* Blue border */
+    background-color: rgba(59, 130, 246, 0.1); /* Light blue background */
+    border-left-width: 3.5px;
+}
+
+/* Padding inside item/card */
+.sidebar-item a {
+    display: flex;
+    align-items: center;
+    padding: 0.85rem 0.75rem; /* vertical / horizontal padding inside box */
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Icon styling */
+.sidebar-icon {
+    width: 1.65rem;
+    height: 1.65rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.8rem; /* Space between icon and text */
+}
+
+/* Hover: ONLY blue left border, no background change */
+.sidebar-item:hover {
+    border-left-color: #3b82f6;
+    box-shadow: 0 4px 16px rgba(50, 100, 250, 0.08);
+    background-color: #e5e7eb;
+}
+
+/* Active: ONLY blue left border, no background change */
+.sidebar-item.active {
+    border-left-color: #3b82f6;
+    background-color: #e5e7eb;
+}
+/* Link area inside sidebar */
+.sidebar-item a {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Icon styling */
+.sidebar-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1.2rem;
+    margin-left: 1.2rem;
+}
+
+.sidebar-icon.lock {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"%3E%3Crect x="3" y="11" width="18" height="11" rx="2" ry="2"%3E%3C/rect%3E%3Cpath d="M7 11V7a5 5 0 0 1 10 0v4"%3E%3C/path%3E%3C/svg%3E');
+}
+
+.sidebar-icon.server {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"%3E%3Crect x="2" y="2" width="20" height="8" rx="2" ry="2"%3E%3C/rect%3E%3Crect x="2" y="14" width="20" height="8" rx="2" ry="2"%3E%3C/rect%3E%3Cline x1="6" y1="6" x2="6" y2="6"%3E%3C/line%3E%3Cline x1="6" y1="18" x2="6" y2="18"%3E%3C/line%3E%3C/svg%3E');
+}
+
+.sidebar-icon.slash {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash"%3E%3Ccircle cx="12" cy="12" r="10"%3E%3C/circle%3E%3Cline x1="4.93" y1="4.93" x2="19.07" y2="19.07"%3E%3C/line%3E%3C/svg%3E');
+}
+
+/* Item title container */
+.item-title-container {
+   padding: 0.5rem 0; /* Padding around title and subtitle */
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem; /* Space between title and subtitle */
+    width: 100%; /* Full width of the item */
+    box-sizing: border-box; /* Include padding in width */
+}
+/* Item text styling */
+.item-title {
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif ;
+    padding-bottom: 4px;/* Space below title */
+}
+
+.item-subtitle {
+    font-size: 0.875rem; /* 14px */
+    font-family: 'Montserrat', sans-serif ;
+}
+
+/* Main content styling */
+main {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: #e5e7eb; /* Light gray */
+    overflow-y: auto;
+}
+
+p {
+    color: #4b5563; /* Gray text */
+}
+
+.placeholder-content {
+    height: auto; /* 384px */
+    background-color: #dcdedf; /* Light gray */
+    margin-top: 1rem;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(220,222,223,0.3), 0 8px 24px rgba(220,222,223,0.18);
+
+    
+}
+
+.placeholder-content-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    
+    padding: 0.5rem 0; /* Padding around title and subtitle */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between title and subtitle */
+    width: 100%; /* Full width of the item */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.placeholder-content h2 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    color: #1f2937; /* Dark gray */
+}
+
+.placeholder-content-other {
+    /*height: auto;  384px */
+    min-height: 85vh;
+    background-color: #e5e7eb; /* Light gray */
+    margin-top: 1rem;
+    padding: 1rem;
+    display: none; /* Hidden by default */
+    
+}
+
+.placeholder-content-other.active {
+  display: block; /* Show only the active section */
+}
+
+
+.placeholder-content-other h2 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    color: #1f2937; /* Dark gray */
+}
+
+.placeholder-content-other p{
+  width: 30rem;
+  text-align: justify;
+ 
+}
+
+
+
+
+
+
+/* =========================
+   6. IPV4 + CIDR FORM
+========================= */
+.wrap {
+  display: grid;
+  place-items: center;
+  margin: 2rem 0;
+  overflow-x: auto;
+  
+}
+
+.panel {
+  width: min(900px, 95vw);
+
+  /* CHANGED: Background color from var(--panel) to #dcdedf */
+  background: #dcdedf; /* Light gray */
+ /* backdrop-filter: blur(6px);*
+
+  /* CHANGED: Solid border 1.5px */
+  border: 2px solid var(--edge);
+
+  border-radius: 0.20rem;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.segments {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 12px;
+
+  /* CHANGED: Background color from #fff to #dcdedf */
+  background: #dcdedf;
+
+  /* CHANGED: Solid border 1.5px */
+  border: 1.5px solid #c6c6c9; 
+
+  border-radius: 0.20rem;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  width: 80%;
+}
+
+.segments:focus-within {
+  border-color: var(--blue); /* keep blue on focus */
+  box-shadow: 0 0 0 0.5px var(--blue);
+}
+
+.seg {
+  width: 20rem;
+  text-align: center;
+  padding: 10px 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+
+  /* CHANGED: Background color from default to #dcdedf */
+  background: #dcdedf;
+
+  /* CHANGED: Solid border 1.5px */
+  border: 1.5px solid #c6c6c9; 
+
+  border-radius: 0.20rem;
+  outline: 0;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.seg:focus {
+  border-color: var(--blue); /* keep blue focus */
+  box-shadow: 0 0 0 0.5px var(--blue);
+}
+
+.dot, .slash {
+  width: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  user-select: none;
+}
+
+.cidr-seg {
+  width: 190px;
+  text-align: center;
+  padding: 11px 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+
+  /* CHANGED: Background color */
+  background: #dcdedf;
+
+  /* CHANGED: Solid border 1.5px */
+  border: 1.5px solid #c6c6c9; 
+
+  border-radius: 0.20rem;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.cidr-seg:focus {
+  border-color: var(--blue); /* keep blue focus */
+  box-shadow: 0 0 0 0.5px var(--blue);
+}
+
+.hosts-seg {
+  width: 100px;
+  text-align: center;
+  padding: 11px 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+
+  /* CHANGED: Background color */
+  background: #dcdedf;
+
+  /* CHANGED: Solid border 1.5px */
+  border: 1.5px solid #c6c6c9; 
+
+  border-radius: 0.20rem;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.hosts-seg:focus {
+  border-color: var(--blue); /* keep blue focus */
+  box-shadow: 0 0 0 0.5px var(--blue);
+}
+
+
+.btn {
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  color: #fff;
+  border: 0;
+  border-radius: 0.20rem;
+  padding: 14px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(37,99,235,.35);
+}
+
+.table-actions {
+  display: flex;
+  justify-content: flex-end; /* align button to the right */
+  margin-right: 2.1rem; /* space from right edge */
+  margin-top: 3.5rem; /* space from top */
+  margin-bottom: 0; /* space between button and table */
+}
+
+.btn-export {
+ background: linear-gradient(180deg, #3b82f6, #2563eb);
+  color: #fff;
+  border: 0;
+  border-radius: 0.20rem;
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(37,99,235,.35);
+  
+}
+
+.hint {
+  margin-top: 10px;
+  color: #475569;
+  font-size: 0.92rem;
+}
+
+
