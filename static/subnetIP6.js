@@ -99,16 +99,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            if (isNaN(hostsValue) || parseInt(hostsValue) <= 0) {
+                alert('Please enter a valid positive integer for required hosts.(fixed-length)');
+                return;
+            }
+
+
+
             // Send data to Flask API
             try {
-                const response = await fetch('/api/subnet', {
+                const response = await fetch('/api/IPv6subnet', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json',},
                     body: JSON.stringify({
                         ip_address: ipAddress,
                         subnet_mask: subnetMaskValue,
                         no_of_hosts: hostsValue,
-                        ip_version: 4 // Hardcoded for IPv4 form
+                        ip_version: 6 // Hardcoded for IPv6 form
                     })
                 });
 
