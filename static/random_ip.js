@@ -92,6 +92,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            if(subnetMask && subnetMaskValue.includes('.')){
+                alert('Subnet mask is not valid for IPv6');
+                return;
+            }
+
+             if(Number(subnetMaskValue) >128 || Number(subnetMaskValue) <=0 ){
+                alert('IPv6 subnet mask must be in CIDR notation (0-128)');
+                return;
+            }
+
             // Send data to Flask API
             try {
                 const response = await fetch('/api/random_ip', {
