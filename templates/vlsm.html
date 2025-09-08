@@ -111,7 +111,7 @@
                 <input class="seg" type="text" placeholder="192.168.1.10 or 2001:db8::8a2e:370:7334">
                 <span class="slash">/</span>
                 <input class="cidr-seg" type="text" placeholder="24 or 255.255.255.0">
-                <input class="hosts-seg" type="text" placeholder="60">
+                <input class="hosts-seg" type="text" placeholder="60,20,5">
               </div>
 
               <!-- Submit button -->
@@ -138,6 +138,7 @@
                     <th>Broadcast Address</th>
                     <th>First Address</th>
                     <th>Last Address</th>
+                    <th>Hosts</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -147,6 +148,7 @@
                     <td>192.168.1.63</td>
                     <td>192.168.1.1</td>
                     <td>192.168.1.62</td>
+                    <td>60</td>
                 </tr>
             
                 
@@ -194,7 +196,7 @@
   </div>
 
   <!-- ===== JS Scripts ===== -->
-  <script src="{{ url_for('static', filename='subnet.js') }}"></script>
+  <script src="{{ url_for('static', filename='vlsm.js') }}"></script>
 
 </body>
 </html>

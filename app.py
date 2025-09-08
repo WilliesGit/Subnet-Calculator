@@ -94,10 +94,10 @@ def ParseSubnet(subnet_mask, ip_version=4):
                 if 0 <= prefix <= 128:
                     return prefix
                 raise ValueError(f"IPv6 CIDR prefix must be between 0 and 128: {subnet_mask}")
-            raise ValueError(f"IPv6 subnet mask must be in CIDR notation (0-128)): {subnet_mask}")
+            raise ValueError(f"IPv6 subnet mask must be in CIDR notation (0-128): {subnet_mask}")
         raise ValueError(f"Unsupported IP version: {ip_version}")
     except ValueError as e:
-        return {'error': str(e)}
+        raise ValueError(f"{e}")
 
 
 def NetAddr(ip_address, subnet_mask):
@@ -235,39 +235,16 @@ def IPv6Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version=6):
     return {'subnets': subnets, 'total': len(subnets)}
 
 
-def Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version=4):
+def VLSM(ip_address, subnet_mask, no_of_hosts, ip_version=4):
+
     network = ipaddress.ip_network(f"{ip_address}/{subnet_mask}", strict=False)
+
     ip_version = network.version
     subnets = []
     max_subnets = 1000 if ip_version == 6 else float('inf')
+
     try:
-        if isinstance(no_of_hosts, int):
-            new_prefix = Find_Prefix(no_of_hosts, ip_version)
-            if new_prefix < network.prefixlen:
-                raise ValueError(f"New prefix {new_prefix} must be greater than or equal to the original prefix {network.prefixlen}")
-            subnets_prefix = network.subnets(new_prefix=new_prefix)
-
-            for index, subnet in enumerate(subnets_prefix, start=1):
-                subnet_addr = str(subnet.network_address)
-
-                if ip_version == 4:
-                    ip_last = str(LastAddr(subnet_addr, new_prefix))
-                else:
-                    # For IPv6, calculate last address as network address + total addresses - 1
-                    network = ipaddress.ip_network(f"{subnet_addr}/{new_prefix}", strict=False)
-                    last_ipv6_int = int(network.network_address) + network.num_addresses - 1
-                    ip_last = str(ipaddress.IPv6Address(last_ipv6_int))
-
-                subnets.append({
-                    'subnet': f"Subnet {index}",  # For table
-                    'network': f"{str(NetAddr(subnet_addr, new_prefix))}/{new_prefix}",
-                    'broadcast': str(BroadAddr(subnet_addr, new_prefix)) if ip_version == 4 else 'N/A',
-                    'first': str(FirstAddr(subnet_addr, new_prefix)),
-                    'last': ip_last
-                })
-                if index >= max_subnets:
-                    break
-        elif isinstance(no_of_hosts, list):
+        if isinstance(no_of_hosts, list):
             host_counts = sorted(no_of_hosts, reverse=True)
             current_network = int(network.network_address)
 
@@ -280,18 +257,22 @@ def Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version=4):
 
                 subnet_addr = str(subnet_network.network_address)
 
+
                 if ip_version == 4:
                     ip_last = str(LastAddr(subnet_addr, new_prefix))
                 else:
                     last_ipv6_int = int(subnet_network.network_address) + subnet_network.num_addresses - 1
                     ip_last = str(ipaddress.IPv6Address(last_ipv6_int))
 
+                usable_hosts = int(subnet_network.num_addresses) - 2
+
                 subnets.append({
                     'subnet': f"Subnet {index}",
                     'network': f"{str(NetAddr(subnet_addr, new_prefix))}/{new_prefix}",
                     'broadcast': str(BroadAddr(subnet_addr, new_prefix)) if ip_version == 4 else 'N/A',
                     'first': str(FirstAddr(subnet_addr, new_prefix)),
-                    'last': ip_last
+                    'last': ip_last,
+                    'hosts' : usable_hosts
                 })
 
                 current_network += subnet_network.num_addresses
@@ -303,7 +284,7 @@ def Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version=4):
                     break
 
         else:
-            raise ValueError("Host input must be an integer (fixed-length) or a list (VLSM)")
+            raise ValueError("Host input must a list (VLSM)")
         return {'subnets': subnets, 'total': len(subnets)}
     except ValueError as e:
         return {'error': str(e)}
@@ -311,11 +292,8 @@ def Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version=4):
 
 def RandomIP(ip_address, subnet_mask, ip_version=4):
     try:
-        ip, ip_version = ValidateIP(ip_address)
-
-        prefix = ParseSubnet(subnet_mask, ip_version)
-
-        network = ipaddress.ip_network(f"{ip}/{prefix}", strict=False)
+        print(f"{subnet_mask}")
+        network = ipaddress.ip_network(f"{ip_address}/{subnet_mask}", strict=False)
 
         if network.version != ip_version:
             return {'error': f"IP version mismatch: {network.version} vs {ip_version}"}
@@ -481,14 +459,15 @@ def IPv6subnet():
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
 
-@app.route('/api/subnet', methods=['POST'])
-def subnet():
+@app.route('/api/vlsm', methods=['POST'])
+def vlsm():
     data = request.json
     try:
         ip_address = data['ip_address']
         subnet_mask = data['subnet_mask']
         no_of_hosts = data['no_of_hosts']
         ip_version = data['ip_version']
+
         if isinstance(no_of_hosts, str) and ',' in no_of_hosts:
             host_strings = no_of_hosts.split(',')
 
@@ -500,9 +479,10 @@ def subnet():
 
             no_of_hosts = host_counts
         else:
-            no_of_hosts = int(no_of_hosts)
-
-        subnets = Subnet_Split(ip_address, subnet_mask, no_of_hosts, ip_version)
+            raise ValueError("Host input must a list (VLSM)")
+            
+       
+        subnets = VLSM(ip_address, subnet_mask, no_of_hosts, ip_version)
 
         return jsonify(subnets), 200
     except Exception as e:
@@ -516,9 +496,12 @@ def random_ip():
     try:
         ip_address = data['ip_address']
         subnet_mask = data['subnet_mask']
-        ip_version = data.get('ip_version', 4)  # Default to IPv4 if not provided
+        ip, ip_version = ValidateIP(ip_address)
+        prefix = ParseSubnet(subnet_mask, ip_version)
 
-        result = RandomIP(ip_address, subnet_mask, ip_version)
+
+        result = RandomIP(ip, prefix, ip_version)
+
         return jsonify(result), 200
     except ValueError as e:
         return jsonify({'error': str(e)}), 400

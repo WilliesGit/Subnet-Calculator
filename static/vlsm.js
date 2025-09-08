@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Send data to Flask API
             try {
-                const response = await fetch('/api/subnet', {
+                const response = await fetch('/api/vlsm', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json',},
                     body: JSON.stringify({
@@ -136,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${subnet.broadcast}</td>
                         <td>${subnet.first}</td>
                         <td>${subnet.last}</td>
+                        <td>${subnet.hosts}</td>
                     `;
                     tableBody.appendChild(row);
                 });
