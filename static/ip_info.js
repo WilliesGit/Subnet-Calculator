@@ -135,5 +135,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const table_actions = document.querySelector('.table-actions');
+
+    if(table_actions){
+        const btn_export = document.querySelector('.btn-export');
+        btn_export.onclick = function(){
+            window.alert('Export button clicked')
+    } 
+    }
+    //
+
+    //const export_btn = document.getElementById('btn-export');
+    //export_btn.onclick = function(){
+        //export_btn.textContent = alert('Export button clicked')
+    //}
+    
+
     console.log('script.js fully loaded');
 });
