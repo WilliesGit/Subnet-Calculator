@@ -12,6 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 
+    <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
   <!-- Main site styles -->
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <!-- Table styles -->
@@ -41,7 +44,7 @@
         <ul id="sidebar-menu">
           <li class="sidebar-item">
             <a href="/">
-              <span class="sidebar-icon lock"></span>
+              <span class="sidebar-icon"><i class="fa-solid fa-lock"></i></span>
               <div class="item-title-container">
                 <div class="item-title">IP Information</div>
                 <div class="item-subtitle">View IP details for IPv4 and IPv6</div>
@@ -51,7 +54,7 @@
 
           <li class="sidebar-item active">
             <a href="/ipv4_calculator">
-              <span class="sidebar-icon server"></span>
+             <span class="sidebar-icon"><i class="fa-solid fa-server"></i></span>
               <div class="item-title-container">
                 <div class="item-title">IPv4 Calculator</div>
                 <div class="item-subtitle">Generate IPv4 subnets and view address details.</div>
@@ -61,7 +64,7 @@
 
           <li class="sidebar-item">
             <a href="/ipv6_calculator">
-              <span class="sidebar-icon server"></span>
+                <span class="sidebar-icon"><i class="fa-solid fa-cloud"></i></span>
               <div class="item-title-container">
                 <div class="item-title">IPv6 Calculator</div>
                 <div class="item-subtitle">Generate IPv6 subnets and view address details.</div>
@@ -71,7 +74,7 @@
 
           <li class="sidebar-item">
             <a href="/randomIP">
-              <span class="sidebar-icon slash"></span>
+               <span class="sidebar-icon-dice"><i class="fa-solid fa-dice"></i></span>
               <div class="item-title-container">
                 <div class="item-title">Random IP Generation</div>
                 <div class="item-subtitle">Generate Random IPv4 and IPv6 Addresses</div>
@@ -81,7 +84,7 @@
 
           <li class="sidebar-item">
             <a href="/vlsm_calculator">
-              <span class="sidebar-icon server"></span>
+                <span class="sidebar-icon-calculator"><i class="fa-solid fa-calculator"></i></span>
               <div class="item-title-container">
                 <div class="item-title">Variable Length Calculation</div>
                 <div class="item-subtitle">Generate subnets of different sizes for IPv4 and IPv6 networks.</div>
