@@ -348,13 +348,19 @@ def RandomIP(ip_address, subnet_mask, ip_version=4):
 
 
 def ExportToCSV(subnets):
-    output = io.StringIO()
+    output = io.StringIO() #In memory for storing text data
     writer = csv.writer(output)
-    writer.writerow(['Subnet Index', 'Network Address', 'Prefix Length', 'Usable Hosts'])
-    for index, subnet in subnets.items():
-        writer.writerow([index, subnet['network'], subnet['prefix'], subnet['hosts']])
-    output.seek(0)
-    return output.getvalue()
+    writer.writerow(['Index', 'Network Address ', 'Broadcast ', 'First Address ', 'Last Address ', ])
+    for index, subnet in subnets.items(): #Iterates over the returned dictionary and returns key-value pair
+        writer.writerow([
+            index, 
+            subnet['network'], 
+            subnet['broadcast'], 
+            subnet['first'],
+            subnet['last']
+        ])
+   
+    return output.getvalue() #Retrieves the entire content of the object
 
 
 
@@ -519,7 +525,7 @@ def export_csv():
         return Response(
             csv_data,
             mimetype='text/csv',
-            headers={"Content-Disposition": "attachment;filename=subnets.csv"}
+            headers={"Content-Disposition": "attachment;filename=Subnets.csv"}
         ), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400

@@ -116,7 +116,7 @@
               </div>
 
               <!-- Submit button -->
-              <button class="btn" type="submit">Calculate</button>
+              <button class="btn" type="submit">Get Detials</button>
             </div>
             <!-- Hint text -->
             <p class="hint">Enter IPv4 (e.g., 192.168.1.10/24) or IPv6 (e.g., 2001:db8::/64). For IPv4, subnet mask (e.g., 255.255.255.0) is also accepted.</p>
@@ -125,7 +125,7 @@
         <!-- ===== FORM END ===== -->
 
         <div class="table-actions">
-            <button class="btn-export" type="submit">Export as CSV</button>
+            <button class="btn-export" type="button" onclick="exportCSV()">Export as CSV</button>
         </div>
 
         <!-- ===== OUTPUT TABLE ===== -->
@@ -194,6 +194,7 @@
 
   <!-- ===== JS Scripts ===== -->
   <script src="{{ url_for('static', filename='ip_info.js') }}"></script>
+  <script src="{{ url_for('static', filename='export_CSV.js') }}"></script>
 
 </body>
 </html>
