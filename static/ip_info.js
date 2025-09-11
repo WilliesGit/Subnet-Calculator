@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch('/api/ip_info', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json',},
-                    body: JSON.stringify({
+                    headers: {'Content-Type': 'application/json',},  // Tell backend our body is JSON
+                    body: JSON.stringify({ // Convert subnets JS object into JSON string
                         ip_address: ipAddress,
                         subnet_mask: subnetMaskValue
                     })
@@ -135,15 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const table_actions = document.querySelector('.table-actions');
-
-    if(table_actions){
-        const btn_export = document.querySelector('.btn-export');
-        btn_export.onclick = function(){
-            window.alert('Export button clicked')
-            ////
-    } 
-    }
+   
     //
 
     //const export_btn = document.getElementById('btn-export');

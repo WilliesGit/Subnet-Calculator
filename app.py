@@ -347,14 +347,25 @@ def RandomIP(ip_address, subnet_mask, ip_version=4):
         return {'error': str(e)}
 
 
-def ExportToCSV(subnets):
-    output = io.StringIO()
+def ExportToCSV(data):
+
+    output = io.StringIO() #In memory for storing text data
     writer = csv.writer(output)
-    writer.writerow(['Subnet Index', 'Network Address', 'Prefix Length', 'Usable Hosts'])
-    for index, subnet in subnets.items():
-        writer.writerow([index, subnet['network'], subnet['prefix'], subnet['hosts']])
-    output.seek(0)
-    return output.getvalue()
+
+    if not data or not isinstance(data, list):
+        return jsonify({'error': 'Invalid data format'}), 400
+    
+    # Write headers from keys of first row
+    headers = data[0].keys()
+    writer.writerow(headers)
+
+    #Write row values
+    for row in data:
+        writer.writerow([
+            row.get(key, '' ) for key in headers
+        ])
+   
+    return output.getvalue() #Retrieves the entire content of the object
 
 
 
@@ -513,13 +524,14 @@ def random_ip():
 @app.route('/api/export_csv', methods=['POST'])
 def export_csv():
     data = request.json
+
     try:
-        subnets = data['subnets']
-        csv_data = ExportToCSV(subnets)
+        tableData = data['data']
+        csv_data = ExportToCSV(tableData)
         return Response(
             csv_data,
             mimetype='text/csv',
-            headers={"Content-Disposition": "attachment;filename=subnets.csv"}
+            headers={"Content-Disposition": "attachment;filename=ExporedData.csv"}
         ), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 400
