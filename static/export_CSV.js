@@ -25,10 +25,7 @@ function triggerExport(){
         return false; // Validation failed
     }
     return true; // Validation passed
-
 }
-    
-
 
 
 
