@@ -1,27 +1,16 @@
-//Form Button Handler
-
-//NOTE: CHANGES NEEDS TO BE DONE REGARDING EXPORT BUTTON DISABLING/ENABLING
-const form = document.querySelector('.panel');
-if (form) {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if(triggerExport()){ 
-           exportBtn.disabled = false;
-           exportCSV();
-        }
-
-    });
-} else {
-    console.warn('Form (.panel) not found on this page.');
-}
-
-
 
 //Export Button Handler
 const exportBtn = document.querySelector('.btn-export')
 if(exportBtn) {
-    exportBtn.disabled = true;  // disable on load
+   exportBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(triggerExport()){
+            exportCSV();
+        }
+        
+   });
 }
+
 
 
 // Shared validation and export logic
@@ -33,10 +22,12 @@ function triggerExport(){
     // Validate inputs. (?)is the optional chaining operator. It checks if ipInput is not null or undefined before calling
     if (!ipInput?.value.trim() || !subnetMask?.value.trim()) {
         alert('Please enter an IP address and subnet mask.');
-        return;
+        return false; // Validation failed
     }
-  }
+    return true; // Validation passed
 
+}
+    
 
 
 
@@ -44,8 +35,6 @@ function triggerExport(){
 async function exportCSV(){
    try{
       
-
-  
         const table = document.querySelector('table');
         const tableBody = table?.querySelector('tbody'); //?. is the optional chaining operator. It checks if table is not null or undefined before calling the querySelector
 
@@ -125,5 +114,7 @@ async function exportCSV(){
     alert(`Export error: ${err.message}`)
   }
 }
+
+
 
   
