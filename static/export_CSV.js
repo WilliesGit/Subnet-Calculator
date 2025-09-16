@@ -95,7 +95,7 @@ async function exportCSV(){
         a.href = url
 
         // Set the suggested filename when downloaded
-        a.download = "ExporedData.csv";
+        a.download = "ExportedData.csv";
 
         // Append the anchor to the document body so we can click it
         document.body.appendChild(a);
