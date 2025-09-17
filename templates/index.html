@@ -19,6 +19,10 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <!-- Table styles -->
   <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+  <!-- Main Section styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='main_section.css') }}">
+  <!-- Form styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
 </head>
 <body>
 
@@ -124,7 +128,7 @@
         </div>
         <!-- ===== FORM END ===== -->
 
-        <div class="table-actions">
+        <div class="table-button-container">
             <button class="btn-export" type="button">Export as CSV</button>
         </div>
 
@@ -239,7 +243,7 @@
                     <p>Get clear, reliable results without needing deep technical knowledge. </p>
                 </div>
             </div>
-            
+
         </div>
         
       </div>
@@ -335,6 +339,8 @@
   <!-- ===== JS Scripts ===== -->
   <script src="{{ url_for('static', filename='ip_info.js') }}"></script>
   <script src="{{ url_for('static', filename='export_CSV.js') }}"></script>
+  <script src="{{ url_for('static', filename='side_bar.js') }}"></script>
+  <script src="{{ url_for('static', filename='nav_bar.js') }}"></script>
 
 </body>
 </html>
