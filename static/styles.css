@@ -402,9 +402,10 @@ p {
     margin: 1rem 0 0 0;
     font-weight: 200;
     color: #272d35; /* Gray text */
-    font-size: 0.99rem;
+    font-size: 1rem;
     line-height: 1.5;
-    text-align: left;
+    letter-spacing: 0.02em;
+    text-align: justify;
  
 }
 
