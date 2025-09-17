@@ -345,7 +345,8 @@ p {
     min-height: 85vh;
     background-color: #e5e7eb; /* Light gray */
     margin-top: 1rem;
-    padding: 1rem;
+    padding: 1rem 2rem 1rem 4rem;
+    position: relative;
     display: none; /* Hidden by default */
     
 }
@@ -361,10 +362,61 @@ p {
     color: #1f2937; /* Dark gray */
 }
 
+.text-content {
+    
+    margin: 1rem 0 1rem 0;
+   
+}
+
+.round-shape {
+      margin-top: 1rem;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(180deg, #3b82f6, #2563eb);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      box-shadow: 0 6px 18px rgba(37,99,235,.35);
+      user-select: none;
+    }
+
+
+
+.placeholder-content-other h3 {
+    font-size: 1.2rem; /* 19px */
+    font-weight: 600;
+    color: #1f2937; /* Dark gray */
+    margin: 1.4rem 0 0 3.5rem;
+
+    text-align: left;
+    letter-spacing: 0.02em;
+}
+
 .placeholder-content-other p{
-  width: 30rem;
-  text-align: justify;
+   
+    margin: 1rem 0 0 0;
+    font-weight: 200;
+    color: #272d35; /* Gray text */
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    text-align: justify;
  
+}
+
+.vertical-line {
+  position: absolute;
+  top: 2rem;        /* Move line down to align with h2 */
+  left: 5px;
+  width: 3px;
+  height: calc(100% - 2rem); /* Reduce height so it starts at h2 */
+  background: #c0d8e6;
+  border-radius: 2px;
 }
 
 

@@ -72,14 +72,4 @@
   background-color: #e9ecef;
 }
 
-/* Clear button */
-.clear-btn {
-  background: linear-gradient(180deg, #3b82f6, #2563eb);
-  color: #fff;
-  border: 0;
-  border-radius: 0.20rem;
-  padding: 14px 18px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(37,99,235,.35);
-}
+
