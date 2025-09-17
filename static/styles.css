@@ -364,7 +364,7 @@ p {
 
 .text-content {
     
-    margin: 1rem 0 1rem 0;
+    margin: 1rem 0 0 0;
    
 }
 
@@ -418,6 +418,42 @@ p {
   background: #c0d8e6;
   border-radius: 2px;
 }
+
+
+.tick-icon{
+  margin-top: 1rem;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  box-shadow: 0 6px 18px rgba(37,99,235,.35);
+  user-select: none;; 
+}
+
+.text-content-features{
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.text-content-features p{
+  margin: 1.4rem 0 0 3.5rem;
+  font-weight: 300;
+  font-size: 1.05rem;
+  color:#272d35; /* Gray text */
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: justify;
+}
+
+
+
+
 
 
 
