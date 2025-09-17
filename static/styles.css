@@ -434,7 +434,7 @@ p {
   font-weight: 600;
   font-size: 1.2rem;
   box-shadow: 0 6px 18px rgba(37,99,235,.35);
-  user-select: none;; 
+  user-select: none;
 }
 
 .text-content-features{
@@ -449,6 +449,123 @@ p {
   line-height: 1.5;
   letter-spacing: 0.02em;
   text-align: justify;
+}
+
+
+.why-use-it-icon{
+  margin-top: 1rem;
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  box-shadow: 0 6px 18px rgba(37,99,235,.35);
+  user-select: none;
+}
+
+.text-content-why-use-it{
+  margin: 0.5rem 0 0.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 3rem;
+}
+
+/* Individual reason block as a small grid with 2 columns */
+.why-point {
+  display: flex;
+  grid-template-columns: minmax(40px, auto) 1fr; /* Icon column auto-sized with min width, text fills remaining */
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  background: #eceef1;
+  border-radius: 1rem;
+  padding: 1.8rem 1.5rem;
+  box-shadow: 0 4px 20px rgb(218 228 255 / 0.4);
+  transition: transform 0.2s ease;
+}
+
+.why-point:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgb(37 99 235 / 0.45);
+}
+
+.text-content-why-use-it p{
+  margin: 1.4rem 0 0 3.5rem;;
+  font-weight: 300;
+  font-size: 1.05rem;
+  color: #272d35;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: justify;
+}
+
+
+.text-content-why-use-it{
+  margin: 0.5rem 0 0.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 3rem;
+}
+
+
+/*Tips section*/
+.tips-icon{
+  margin-top: 1rem;
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  box-shadow: 0 6px 18px rgba(37,99,235,.35);
+  user-select: none;
+}
+
+.text-content-tips{
+  margin: 0.5rem 0 0.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.8rem;
+}
+
+/* Individual reason block as a small grid with 2 columns */
+.tip-point {
+  display: flex;
+  grid-template-columns: minmax(40px, auto) 1fr; /* Icon column auto-sized with min width, text fills remaining */
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  background: #eceef1;
+  border-radius: 1rem;
+  padding: 1.8rem 1.5rem;
+  box-shadow: 0 4px 20px rgb(218 228 255 / 0.4);
+  transition: transform 0.2s ease;
+}
+
+.tip-point:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgb(37 99 235 / 0.45);
+}
+
+.text-content-tips p{
+  margin: 1.4rem 0 0 3.5rem;;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #272d35;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: left;
 }
 
 
