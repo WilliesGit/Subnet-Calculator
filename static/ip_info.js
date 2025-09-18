@@ -1,117 +1,66 @@
 
 
+/*** ===== SUBNET CALCULATOR INTERACTION ===== ***/
+const form = document.querySelector('.panel');
+const tableBody = document.querySelector('.table tbody'); // target your table body
 
-    const links = document.querySelectorAll('nav a');
-    const sections = document.querySelectorAll('.placeholder-content-other');
+if (form && tableBody) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault(); // prevent normal page reload
+        console.log("✅ Form submit handler triggered");
 
-    // Hide all sections and remove active class from links
-    function showSection(targetId){
-        sections.forEach(section => section.classList.remove('active'));
-        links.forEach(link => link.classList.remove('active'));
+        // Get IP address and subnet mask from inputs
+        const ipInput = document.querySelector('.seg');
+        const subnetMask = document.querySelector('.cidr-seg');
+        const ipAddress = ipInput.value.trim();
+        const subnetMaskValue = subnetMask.value.trim();
 
-    // Show the target section and highlight its link
-        const target = document.getElementById(targetId);
-        if (target) {
-            target.classList.add('active');
-            const targetLink = document.querySelector(`nav a[href="#${targetId}"]`);
-            if (targetLink) targetLink.classList.add('active');
-            target.scrollIntoView({ behavior: 'smooth' });
+        // Basic validation: ensure fields aren't empty
+        if (!ipAddress || !subnetMaskValue) {
+            alert('Please enter an IP address and subnet mask.');
+            return;
         }
-    }
 
-    // Smooth scrolling on click
-    links.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-           showSection(targetId);
-        });
-    });
+        // Send data to Flask API
+        try {
+            const response = await fetch('/api/ip_info', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json',},  // Tell backend our body is JSON
+                body: JSON.stringify({ // Convert subnets JS object into JSON string
+                    ip_address: ipAddress,
+                    subnet_mask: subnetMaskValue
+                })
+            });
 
-    // Scroll spy
-    function highlightNav() {
-        let current = '';
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                current = section.id;
-            }
-        });
-        links.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
-        });
-    }
+            const result = await response.json();
 
-    
-
-    window.addEventListener('scroll', highlightNav);
-    highlightNav(); // Initial call
-
-
-    /*** ===== SUBNET CALCULATOR INTERACTION ===== ***/
-    const form = document.querySelector('.panel');
-    const tableBody = document.querySelector('.table tbody'); // target your table body
-
-    if (form && tableBody) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // prevent normal page reload
-            console.log("✅ Form submit handler triggered");
-
-           // Get IP address and subnet mask from inputs
-            const ipInput = document.querySelector('.seg');
-            const subnetMask = document.querySelector('.cidr-seg');
-            const ipAddress = ipInput.value.trim();
-            const subnetMaskValue = subnetMask.value.trim();
-
-            // Basic validation: ensure fields aren't empty
-            if (!ipAddress || !subnetMaskValue) {
-                alert('Please enter an IP address and subnet mask.');
+            if (!response.ok) {
+                alert(result.error || 'Error processing request');
                 return;
             }
 
-            // Send data to Flask API
-            try {
-                const response = await fetch('/api/ip_info', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json',},  // Tell backend our body is JSON
-                    body: JSON.stringify({ // Convert subnets JS object into JSON string
-                        ip_address: ipAddress,
-                        subnet_mask: subnetMaskValue
-                    })
-                });
+            // Clear existing rows
+            tableBody.innerHTML = '';
 
-                const result = await response.json();
+            // Insert new row with returned values
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${result.network_address}</td>
+                <td>${result.broadcast_address}</td>
+                <td>${result.first_address}</td>
+                <td>${result.last_address}</td>
+            `;
+            tableBody.appendChild(row);
 
-                if (!response.ok) {
-                    alert(result.error || 'Error processing request');
-                    return;
-                }
+            // Optional: Scroll table into view after update
+            document.querySelector('.table-wrapper').scrollIntoView({ behavior: 'smooth' });
 
-                // Clear existing rows
-                tableBody.innerHTML = '';
-
-                // Insert new row with returned values
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${result.network_address}</td>
-                    <td>${result.broadcast_address}</td>
-                    <td>${result.first_address}</td>
-                    <td>${result.last_address}</td>
-                `;
-                tableBody.appendChild(row);
-
-                // Optional: Scroll table into view after update
-                document.querySelector('.table-wrapper').scrollIntoView({ behavior: 'smooth' });
-
-            } catch (err) {
-                console.error('Error fetching IP info:', err);
-                alert('Failed to connect to server');
-            }
-        });
-    }
+        } catch (err) {
+            console.error('Error fetching IP info:', err);
+            alert('Failed to connect to server');
+        }
+    });
+}
 
 
 
