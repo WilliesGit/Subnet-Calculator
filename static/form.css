@@ -75,6 +75,8 @@
   box-shadow: 0 0 0 0.5px var(--blue);
 }
 
+
+
 .dot, .slash {
   width: 10px;
   display: flex;
@@ -128,6 +130,23 @@
 .hosts-seg:focus {
   border-color: var(--blue); /* keep blue focus */
   box-shadow: 0 0 0 0.5px var(--blue);
+}
+
+
+.seg.input-error,
+.cidr-seg.input-error, 
+.hosts-seg.input-error {
+    border-color: #e53935 !important;
+    box-shadow: 0 0 0 1.5px #e53935 !important;
+}
+.error-message {
+    flex-basis: 100%;
+    width: 100%;
+    display: block;
+    color: #e53935;
+    font-size: 0.9rem;
+    margin-top: 0.2em;
+    /* No display:flex! Let divs stack naturally. */
 }
 
 

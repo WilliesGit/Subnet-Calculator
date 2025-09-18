@@ -15,11 +15,43 @@ if (form && tableBody) {
         const ipAddress = ipInput.value.trim();
         const subnetMaskValue = subnetMask.value.trim();
 
+        const errorSeg = document.querySelector('.error-message.error-seg');
+        const errorCidrSeg = document.querySelector('.error-message.error-cidr');
+
+
+        /*
         // Basic validation: ensure fields aren't empty
         if (!ipAddress || !subnetMaskValue) {
-            alert('Please enter an IP address and subnet mask.');
+            //alert('Please enter an IP address and subnet mask.');
+            err
+
             return;
+        }*/
+
+        if (!ipAddress) {
+            ipInput.classList.add('input-error');
+            document.querySelector('.error-seg').textContent = 'Please enter an IP address';
+            document.querySelector('.error-seg').style.display = 'block';
+            return;
+        } 
+        else {
+            ipInput.classList.remove('input-error');
+            document.querySelector('.error-seg').style.display = 'none';
         }
+        
+
+        if (!subnetMaskValue) {
+            subnetMask.classList.add('input-error');
+            document.querySelector('.error-cidr').textContent = 'Please enter a subnet mask';
+            document.querySelector('.error-cidr').style.display = 'block';
+            return;
+        } 
+        else {
+            subnetMask.classList.remove('input-error');
+            document.querySelector('.error-cidr').style.display = 'none';
+
+        }
+
 
         // Send data to Flask API
         try {
