@@ -20,13 +20,52 @@ if (form && tableBody) {
         const hostsValue = hostsInput.value.trim();
 
         // Basic validation: ensure fields aren't empty
-        if (!ipAddress || !subnetMaskValue || !hostsValue) {
-            alert('Please enter an IP address, subnet mask and required host.');
+        if (!ipAddress) {
+            ipInput.classList.add('input-error');
+            document.querySelector('.error-seg').textContent = 'Please enter an IP address';
+            document.querySelector('.error-seg').style.display = 'block';
+            return;
+        } 
+        else {
+            ipInput.classList.remove('input-error');
+            document.querySelector('.error-seg').style.display = 'none';
+        }
+        
+
+        if (!subnetMaskValue) {
+            subnetMask.classList.add('input-error');
+            document.querySelector('.error-cidr').textContent = 'Please enter a subnet mask';
+            document.querySelector('.error-cidr').style.display = 'block';
+            return;
+        } 
+        else {
+            subnetMask.classList.remove('input-error');
+            document.querySelector('.error-cidr').style.display = 'none';
+
+        }
+
+        if(!hostsValue) {
+            hostsInput.classList.add('input-error');
+            document.querySelector('.error-hosts').textContent = 'Please enter no. of hosts';
+            document.querySelector('.error-hosts').style.display = 'block';
+            return;
+        } 
+        else {
+            hostsInput.classList.remove('input-error');
+            document.querySelector('.error-hosts').style.display = 'none';
+
+        }
+
+
+        if (isNaN(hostsValue) || parseInt(hostsValue) <= 0) {
+            hostsInput.classList.add('input-error');
+            document.querySelector('.error-hosts').textContent = 'Please enter a valid integer';
+            document.querySelector('.error-hosts').style.display = 'block';
             return;
         }
-        if (isNaN(hostsValue) || parseInt(hostsValue) <= 0) {
-            alert('Please enter a valid positive integer for required hosts.(fixed-length)');
-            return;
+        else{
+            hostsInput.classList.remove('input-error');
+            document.querySelector('.error-hosts').style.display = 'none';
         }
 
         

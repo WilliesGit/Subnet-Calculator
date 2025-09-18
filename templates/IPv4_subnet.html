@@ -113,12 +113,18 @@
             <div class="form-row">
 
               <!-- Segments block -->
-              <!-- Segments block -->
               <div class="segments" aria-label="IPv4 address">
                 <input class="seg" type="text" placeholder="192.168.1.10">
+                <div class="error-message error-seg" style="display:none;"></div>
+
                 <span class="slash">/</span>
+
                 <input class="cidr-seg" type="text" placeholder="24 or 255.255.255.0">
+                <div class="error-message error-cidr" style="display:none;">Please enter  subnet mask</div>
+
                 <input class="hosts-seg" type="text" placeholder="60">
+                <div class="error-message error-hosts" style="display:none;"></div>
+
               </div>
 
               <!-- Submit button -->
