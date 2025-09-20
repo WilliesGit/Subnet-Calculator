@@ -19,14 +19,9 @@ if (form && tableBody) {
         const errorCidrSeg = document.querySelector('.error-message.error-cidr');
 
 
-        /*
+        
         // Basic validation: ensure fields aren't empty
-        if (!ipAddress || !subnetMaskValue) {
-            //alert('Please enter an IP address and subnet mask.');
-            err
-
-            return;
-        }*/
+        
 
         if (!ipAddress) {
             ipInput.classList.add('input-error');
