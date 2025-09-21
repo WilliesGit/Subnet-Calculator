@@ -27,6 +27,24 @@ if (form && tableBody) {
 
         // Basic validation: ensure fields aren't empty
         // Basic validation: ensure fields aren't empty
+
+        if(!ipAddress && !subnetMaskValue && !hostsValue){
+           const hint_text =  document.querySelector('.hint')
+           hint_text.style.color = 'red';
+           hint_text.style.border = '1px solid #f5a5a5';
+           hint_text.style.borderRadius = '3px';
+           hint_text.style.backgroundColor = '#ebc8d0ff';
+           hint_text.style.padding = '8px 10px';
+           return;
+        }
+        else{
+            const hint_text =  document.querySelector('.hint')
+            hint_text.style.color = '#475569';
+            hint_text.style.border = 'none';
+            hint_text.style.backgroundColor = 'transparent';
+            hint_text.classList.remove('red')
+        }
+        
         if (!ipAddress) {
             ipInput.classList.add('input-error');
             document.querySelector('.error-seg').textContent = 'Please enter an IP address';
