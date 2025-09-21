@@ -21,11 +21,68 @@ if (form && tableBody) {
         const subnetMaskValue = subnetMask.value.trim();
         const hostsValue = hostsInput.value.trim();
 
+
         // Basic validation: ensure fields aren't empty
-        if (!ipAddress || !subnetMaskValue || !hostsValue) {
-            alert('Please enter an IP address, subnet mask and required host.');
-            return;
+        if(!ipAddress && !subnetMaskValue && !hostsValue){
+           const hint_text =  document.querySelector('.hint')
+           hint_text.style.color = 'red';
+           hint_text.style.border = '1px solid #f5a5a5';
+           hint_text.style.borderRadius = '3px';
+           hint_text.style.backgroundColor = '#ebc8d0ff';
+           hint_text.style.padding = '8px 10px';
+           return;
         }
+        else{
+            const hint_text =  document.querySelector('.hint')
+            hint_text.style.color = '#475569';
+            hint_text.style.border = 'none';
+            hint_text.style.backgroundColor = 'transparent';
+            hint_text.classList.remove('red')
+        }
+
+        if (!ipAddress) {
+            ipInput.classList.add('input-error');
+            document.querySelector('.error-seg').textContent = 'Please enter an IP address';
+            document.querySelector('.error-seg').style.display = 'block';
+            return;
+        } 
+        else {
+            ipInput.classList.remove('input-error');
+            document.querySelector('.error-seg').style.display = 'none';
+        }
+        
+
+        if (!subnetMaskValue) {
+            subnetMask.classList.add('input-error');
+            document.querySelector('.error-cidr').textContent = 'Please enter CIDR notation or a subnet mask';
+            document.querySelector('.error-cidr').style.display = 'block';
+            return;
+        } 
+        else {
+            subnetMask.classList.remove('input-error');
+            document.querySelector('.error-cidr').style.display = 'none';
+
+        }
+
+        if(!hostsValue) {
+            hostsInput.classList.add('input-error');
+            document.querySelector('.error-hosts').textContent = 'Please enter no. of hosts';
+            document.querySelector('.error-hosts').style.display = 'block';
+            return;
+        } 
+        else {
+            hostsInput.classList.remove('input-error');
+            document.querySelector('.error-hosts').style.display = 'none';
+
+        }
+
+
+
+        
+
+    
+
+
 
         // Send data to Flask API
         try {

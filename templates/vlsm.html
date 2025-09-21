@@ -115,9 +115,15 @@
               <!-- Segments block -->
               <div class="segments" aria-label="IPv4 address">
                 <input class="seg" type="text" placeholder="192.168.1.10 or 2001:db8::8a2e:370:7334">
+                <div class="error-message error-seg" style="display:none;"></div>
+
                 <span class="slash">/</span>
-                <input class="cidr-seg" type="text" placeholder="24 or 255.255.255.0">
+
+                <input class="cidr-seg" type="text" placeholder="24 or 255.255.255.0"><div class="error-message error-cidr" style="display:none;"></div>
+
                 <input class="hosts-seg" type="text" placeholder="60,20,5">
+                <div class="error-message error-hosts" style="display:none;"></div>
+                
               </div>
 
               <!-- Submit button -->
