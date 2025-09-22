@@ -18,10 +18,11 @@ function triggerExport(){
    
     const ipInput = document.querySelector('.seg');
     const subnetMask = document.querySelector('.cidr-seg');
+    const hostsInput = document.querySelector('.hosts-seg');
 
     // Validate inputs. (?)is the optional chaining operator. It checks if ipInput is not null or undefined before calling
-    if (!ipInput?.value.trim() || !subnetMask?.value.trim()) {
-        alert('Please enter an IP address and subnet mask.');
+    if (!ipInput?.value.trim() || !subnetMask?.value.trim() || !hostsInput?.value.trim()) {
+        alert('Please fill in all required fields before exporting.');
         return false; // Validation failed
     }
     return true; // Validation passed
