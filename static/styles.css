@@ -55,6 +55,27 @@ header h1 {
     font-family: 'Montserrat', sans-serif;
 }
 
+header h1 a {
+    text-decoration: none;
+    color: inherit; /* inherits color from parent (removes forced gray) */
+    position: relative; /* for custom underline */
+    padding-bottom: 2px;
+}
+header h1 a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+header h1 a:hover::after {
+    width: 100%;
+}
+
 
 /* Nav container styling */
 nav {
