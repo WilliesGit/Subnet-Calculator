@@ -1,5 +1,32 @@
-const links = document.querySelectorAll('nav a');
+const links = document.querySelectorAll('.desktop-nav a, .mobile-nav a');
 const sections = document.querySelectorAll('.placeholder-content-other');
+
+// Mobile menu toggle functionality
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const mobileNav = document.querySelector('.mobile-nav');
+
+if (mobileMenuToggle && mobileNav) {
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileNav.classList.remove('active');
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+            mobileMenuToggle.classList.remove('active');
+            mobileNav.classList.remove('active');
+        }
+    });
+}
 
 // Hide all sections and remove active class from links
 function showSection(targetId){
@@ -10,7 +37,7 @@ function showSection(targetId){
     const target = document.getElementById(targetId);
     if (target) {
         target.classList.add('active');
-        const targetLink = document.querySelector(`nav a[href="#${targetId}"]`);
+        const targetLink = document.querySelector(`.desktop-nav a[href="#${targetId}"], .mobile-nav a[href="#${targetId}"]`);
         if (targetLink) targetLink.classList.add('active');
         target.scrollIntoView({ behavior: 'smooth' });
     }
@@ -34,7 +61,8 @@ function highlightNav() {
             current = section.id;
         }
     });
-    links.forEach(link => {
+    // Update both desktop and mobile nav links
+    document.querySelectorAll('.desktop-nav a, .mobile-nav a').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === '#' + current) {
             link.classList.add('active');
