@@ -269,3 +269,184 @@ p {
   letter-spacing: 0.02em;
   text-align: left;
 }
+
+/* =========================
+   RESPONSIVE MAIN SECTION
+========================= */
+
+/* Tablets (768px and down) */
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+  
+  .placeholder-content {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .placeholder-content-other {
+    min-height: auto;
+    padding: 1rem 1.5rem;
+  }
+  
+  .placeholder-content h2,
+  .placeholder-content-other h2 {
+    font-size: 1.3rem;
+  }
+  
+  .placeholder-content-other h3 {
+    font-size: 1.1rem;
+    margin: 1.2rem 0 0 3rem;
+  }
+  
+  .placeholder-content-other p {
+    font-size: 0.95rem;
+    margin: 0.8rem 0 0 0;
+  }
+  
+  .vertical-line {
+    left: 3px;
+    width: 2px;
+  }
+  
+  .round-shape,
+  .tick-icon,
+  .why-use-it-icon,
+  .tips-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  /* Adjust grid layouts */
+  .text-content-why-use-it {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .text-content-tips {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .why-point,
+  .tip-point {
+    padding: 1.5rem 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .text-content-why-use-it p,
+  .text-content-tips p {
+    margin: 1rem 0 0 3rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile phones (480px and down) */
+@media (max-width: 480px) {
+  main {
+    padding: 0.75rem;
+  }
+  
+  .placeholder-content {
+    padding: 0.5rem;
+  }
+  
+  .placeholder-content-other {
+    padding: 0.75rem 1rem;
+  }
+  
+  .placeholder-content h2,
+  .placeholder-content-other h2 {
+    font-size: 1.2rem;
+  }
+  
+  .placeholder-content-other h3 {
+    font-size: 1rem;
+    margin: 1rem 0 0 2.5rem;
+  }
+  
+  .placeholder-content-other p {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+  
+  .round-shape,
+  .tick-icon,
+  .why-use-it-icon,
+  .tips-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+  
+  .why-point,
+  .tip-point {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.2rem 1rem;
+    gap: 1rem;
+  }
+  
+  .text-content-why-use-it p,
+  .text-content-tips p {
+    margin: 0;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .text-content-features p {
+    margin: 1rem 0 0 2.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Extra small phones (360px and down) */
+@media (max-width: 360px) {
+  .placeholder-content {
+    padding: 0.4rem;
+  }
+  
+  .placeholder-content-other {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .placeholder-content h2,
+  .placeholder-content-other h2 {
+    font-size: 1.1rem;
+  }
+  
+  .placeholder-content-other h3 {
+    font-size: 0.95rem;
+    margin: 0.8rem 0 0 2rem;
+  }
+  
+  .placeholder-content-other p {
+    font-size: 0.85rem;
+  }
+  
+  .round-shape,
+  .tick-icon,
+  .why-use-it-icon,
+  .tips-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .why-point,
+  .tip-point {
+    padding: 1rem 0.8rem;
+  }
+  
+  .text-content-why-use-it p,
+  .text-content-tips p,
+  .text-content-features p {
+    font-size: 0.85rem;
+  }
+  
+  .text-content-features p {
+    margin: 0.8rem 0 0 2rem;
+  }
+}
