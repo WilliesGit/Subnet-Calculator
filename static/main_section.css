@@ -131,8 +131,8 @@ p {
   justify-content: center;
   align-items: center;
   color: white;
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-weight: 900;
+  font-size: 1.6rem;
   box-shadow: 0 6px 18px rgba(37,99,235,.35);
   user-select: none;
 }
@@ -330,6 +330,10 @@ p {
     gap: 1.5rem;
   }
   
+  .text-content-features {
+    margin: 0.4rem 0;
+  }
+  
   .why-point,
   .tip-point {
     padding: 1.5rem 1.2rem;
@@ -337,7 +341,8 @@ p {
   }
   
   .text-content-why-use-it p,
-  .text-content-tips p {
+  .text-content-tips p, 
+  .text-content-features p{
     margin: 1rem 0 0 3rem;
     font-size: 0.95rem;
   }
@@ -396,6 +401,10 @@ p {
     text-align: center;
   }
   
+  .text-content-features {
+    margin: 0.3rem 0;
+  }
+  
   .text-content-features p {
     margin: 1rem 0 0 2.5rem;
     font-size: 0.95rem;
@@ -444,6 +453,10 @@ p {
   .text-content-tips p,
   .text-content-features p {
     font-size: 0.85rem;
+  }
+  
+  .text-content-features {
+    margin: 0.2rem 0;
   }
   
   .text-content-features p {
