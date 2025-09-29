@@ -2,7 +2,7 @@
 ![Subnet-Calculator Demo](Demo.gif)
 
 ## Overview
-A Web-based Subnet Calculator built with Python (Flask), HTML, CSS, and JavaScript for IPv4 and IPv6 networks. Easily calculate network details, generate subnets, perform VLSM, and export results to CSV.
+A Web-based Subnet Calculator built with Python (Flask RESTful APIs), HTML, CSS, and JavaScript for IPv4 and IPv6 networks. Easily calculate network details, generate subnets, perform VLSM, and export results to CSV.
 
 ## Features
 - IPv4 and IPv6 subnet calculation
@@ -13,7 +13,8 @@ A Web-based Subnet Calculator built with Python (Flask), HTML, CSS, and JavaScri
 
 
 ## Technologies Used
-- Python (Flask): Backend API and routing
-- HTML: Page structure and templates
--  CSS: Styling, animations, and error highlighting
-- JavaScript: Form validation, error handling, and dynamic UI
+- Python (Flask): Builds the API endpoint to accept JSON POST requests, validate, process, and respond.
+- HTML: Page structure/rendering and templates
+- CSS: Styling, animations, and error highlighting
+- Ajax/Fetch: Transfers data between front and back ends in JSON format
+- JavaScript: Form validation, error handling, dynamic UI. Uses DOM event handlers and Ajax (fetch) to send form data asynchronously to backend.
