@@ -7,7 +7,7 @@ const tableBody = document.querySelector('.table tbody'); // target your table b
 if (form && tableBody) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault(); // prevent normal page reload
-        console.log("✅ Form submit handler triggered");
+        //console.log("✅ Form submit handler triggered");
 
         // Get IP address and subnet mask from inputs
         const ipInput = document.querySelector('.seg');
@@ -98,7 +98,7 @@ if (form && tableBody) {
             document.querySelector('.table-wrapper').scrollIntoView({ behavior: 'smooth' });
 
         } catch (err) {
-            console.error('Error fetching IP info:', err);
+            //console.error('Error fetching IP info:', err);
             alert('Failed to connect to server');
         }
     });
