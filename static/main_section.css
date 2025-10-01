@@ -378,12 +378,18 @@ p {
   }
   
   .round-shape,
-  .tick-icon,
+  .tick-icon{
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+
   .why-use-it-icon,
   .tips-icon {
     width: 30px;
     height: 30px;
     font-size: 0.9rem;
+    margin: 0 0 0 0;
   }
   
   .why-point,
@@ -398,7 +404,7 @@ p {
   .text-content-tips p {
     margin: 0 0 0 2.5rem;
     font-size: 0.9rem;
-    text-align: center;
+    text-align: left;
   }
   
   .text-content-features {

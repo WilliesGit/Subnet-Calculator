@@ -13,7 +13,7 @@ const tableBody = document.querySelector('.table tbody'); // target your table b
 if (form && tableBody) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault(); // prevent normal page reload
-        console.log("✅ Form submit handler triggered");
+        //console.log("✅ Form submit handler triggered");
 
         // Get IP address and subnet mask from inputs
         // Get inputs
