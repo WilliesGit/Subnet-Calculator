@@ -44,7 +44,7 @@
 
   border-radius: 0.20rem;
   transition: border-color 0.18s, box-shadow 0.18s;
-  width: 80%;
+  width: 82%;
 }
 
 .segments:focus-within {
@@ -153,12 +153,18 @@
 .btn {
   background: linear-gradient(180deg, #3b82f6, #2563eb);
   color: #fff;
+  margin-left: auto; /* push to right */
   border: 0;
   border-radius: 0.20rem;
   padding: 14px 18px;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(37,99,235,.35);
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(180deg, #2563eb, #1e40af);
 }
 
 .table-button-container {
@@ -178,7 +184,11 @@
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(37,99,235,.35);
+  transition: background 0.3s ease;
   
+}
+.btn-export:hover {
+  background: linear-gradient(180deg, #2563eb, #1e40af);
 }
 
 .hint {
