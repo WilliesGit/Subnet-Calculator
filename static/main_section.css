@@ -1,9 +1,57 @@
 /* Main content styling */
+.notification {
+    position: absolute;
+    bottom: 1rem;
+    right: 0;
+    background-color: #7cb7a3; /* Green background for success */
+    color: white;
+    padding: 1rem 1.2rem;
+    border: 1px solid #61b79a;
+    border-radius: 0.2rem;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.3), 0 8px 24px rgba(16,185,129,0.18);
+    font-size: 0.95rem;
+    font-weight: 500;
+    z-index: 1000; /* Ensure it appears above other content */
+    display: none; /* Hidden by default */
+    min-width: 300px;
+    text-align: center;
+    animation: slideInFromRight 0.3s ease-out;
+}
+
+/* Animation for notification */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Auto-hide animation */
+.notification.hide {
+    animation: slideOutToRight 0.3s ease-in forwards;
+}
+
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
 main {
     flex: 1;
     padding: 1.5rem;
     background-color: #e5e7eb; /* Light gray */
     overflow-y: auto;
+    position: relative; /* For notification positioning */
 }
 
 p {
@@ -467,5 +515,14 @@ p {
   
   .text-content-features p {
     margin: 0.8rem 0 0 2rem;
+  }
+  
+  /* Notification responsive */
+  .notification {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: 180px;
   }
 }
