@@ -15,9 +15,7 @@ if (form && tableBody) {
         const ipAddress = ipInput.value.trim();
         const subnetMaskValue = subnetMask.value.trim();
 
-        const errorSeg = document.querySelector('.error-message.error-seg');
-        const errorCidrSeg = document.querySelector('.error-message.error-cidr');
-
+     
 
         
         // Basic validation: ensure fields aren't empty
@@ -61,6 +59,15 @@ if (form && tableBody) {
             document.querySelector('.error-cidr').style.display = 'none';
 
         }
+
+        //Table update notification
+        const form_btn = document.querySelector('.btn')
+
+        if(ipAddress && subnetMaskValue && form_btn){
+            const notify_btn =  document.querySelector('.notification')
+            notify_btn.style.display = 'block'
+        }
+        
 
 
         // Send data to Flask API
