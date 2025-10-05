@@ -1,51 +1,4 @@
 /* Main content styling */
-.notification {
-    position: absolute;
-    bottom: 1rem;
-    right: 0;
-    background-color: #7cb7a3; /* Green background for success */
-    color: white;
-    padding: 1rem 1.2rem;
-    border: 1px solid #61b79a;
-    border-radius: 0.2rem;
-    box-shadow: 0 4px 12px rgba(16,185,129,0.3), 0 8px 24px rgba(16,185,129,0.18);
-    font-size: 0.95rem;
-    font-weight: 500;
-    z-index: 1000; /* Ensure it appears above other content */
-    display: none; /* Hidden by default */
-    min-width: 300px;
-    text-align: center;
-    animation: slideInFromRight 0.3s ease-out;
-}
-
-/* Animation for notification */
-@keyframes slideInFromRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-/* Auto-hide animation */
-.notification.hide {
-    animation: slideOutToRight 0.3s ease-in forwards;
-}
-
-@keyframes slideOutToRight {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
 main {
     flex: 1;
     padding: 1.5rem;
@@ -241,7 +194,7 @@ p {
 }
 
 .why-point:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px);/* Lifts the background box on hover */
   box-shadow: 0 10px 30px rgb(37 99 235 / 0.45);
 }
 
@@ -317,6 +270,72 @@ p {
   letter-spacing: 0.02em;
   text-align: left;
 }
+
+/* Notification styling */
+.notification {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1.5rem;
+    background-color: #7cb7a3; /* Green background for success */
+    color: white;
+    padding: 1rem 1.2rem;
+    border: 1px solid #61b79a;
+    border-radius: 0.2rem;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.3), 0 8px 24px rgba(16,185,129,0.18);
+    font-size: 0.95rem;
+    font-weight: 500;
+    z-index: 1000; /* Ensure it appears above or on top other content */
+    display: none; /* Hidden by default */
+    min-width: 300px;
+    text-align: center;
+    animation: slideInFromRight 0.3s ease-out; /* keyframes Animation called here using the animation property */
+}
+
+/* Animation for notification */
+/*@keyframes, used to create CSS animation*/
+@keyframes slideInFromRight { /* Animation name */
+    from { /* Indicates the starting state */
+        transform: translateX(100%); /*Moves element to the right*/
+        opacity: 0;
+    }
+    to { /* Indicates the ending state */
+        transform: translateX(0);
+        opacity: 1;/* Fully visible */
+    }
+}
+
+/* Auto-hide animation */
+.notification.hide {
+    animation: slideOutToRight 0.3s ease-in forwards;
+}
+
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+/* WORK IN PROGRESS - NOTIFICATION ICON NOT SHOWING */
+/* Notification icon styling */
+.notify-icon{
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(180deg, #10b981, #059669); /* Green gradient */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 900;
+  font-size: 1.2rem;
+  box-shadow: 0 6px 18px rgba(16,185,129,0.35); /* Green shadow */
+  user-select: none;
+}
+
 
 /* =========================
    RESPONSIVE MAIN SECTION
