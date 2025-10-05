@@ -60,13 +60,35 @@ if (form && tableBody) {
 
         }
 
+        setTimeout(() => {
+           const form_btn = document.querySelector('.btn')
+
+            if(ipAddress && subnetMaskValue && form_btn){
+                const notify_btn =  document.querySelector('.notification')
+                notify_btn.style.display = 'block'
+            } 
+        })
+        
         //Table update notification
         const form_btn = document.querySelector('.btn')
+        const notification =  document.querySelector('.notification')
+    
 
         if(ipAddress && subnetMaskValue && form_btn){
-            const notify_btn =  document.querySelector('.notification')
-            notify_btn.style.display = 'block'
+            notification.textContent = 'Table updated successfully';
+            notification.style.display = 'flex';
         }
+
+        
+        //Hide notification after 3 seconds
+        setTimeout(() => {
+            notification.classList.add('hide');
+            setTimeout(() => {
+                notification.style.display = 'none';
+                notification.classList.remove('hide');
+            }, 300); // Match this duration with the CSS animation duration
+        }, 3000)
+        
         
 
 
