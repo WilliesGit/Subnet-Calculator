@@ -276,14 +276,14 @@ p {
     position: absolute;
     bottom: 0.5rem;
     right: 1.5rem;
-    background-color: #7cb7a3; /* Green background for success */
-    color: white;
+   background:#b0d6b0; /* Green gradient */
+   
     padding: 1rem 1.2rem;
-    border: 1px solid #61b79a;
+   
     border-radius: 0.2rem;
     box-shadow: 0 4px 12px rgba(16,185,129,0.3), 0 8px 24px rgba(16,185,129,0.18);
     font-size: 0.95rem;
-    font-weight: 500;
+    font-weight: 600;
     z-index: 1000; /* Ensure it appears above or on top other content */
     display: none; /* Hidden by default */
     min-width: 300px;
@@ -319,21 +319,32 @@ p {
         opacity: 0;
     }
 }
-/* WORK IN PROGRESS - NOTIFICATION ICON NOT SHOWING */
+
 /* Notification icon styling */
 .notify-icon{
+  position: absolute; 
+  left: 0.8rem  ; /* Space from left edge of notification */
+  top: 0.5rem; /* Vertically center */
   width: 40px;
   height: 40px;
-  background: linear-gradient(180deg, #10b981, #059669); /* Green gradient */
+  /*background: linear-gradient(180deg, #10b981, #059669); /* Green gradient */
+  background:#81b781; /* Solid green */
   border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #194e19;
   font-weight: 900;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   box-shadow: 0 6px 18px rgba(16,185,129,0.35); /* Green shadow */
   user-select: none;
+}
+
+.notify_message{
+  margin-left: 3rem; /* Space to the right of icon */
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #194e19;
 }
 
 
