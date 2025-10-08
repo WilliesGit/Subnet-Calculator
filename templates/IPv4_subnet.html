@@ -148,12 +148,20 @@
               <!-- Submit button -->
               <button class="btn" type="submit">Calculate</button>
             </div>
-
+            
+            <!-- Hint text -->
             <p class="hint">Enter IPv4 + either CIDR (/24) or a full subnet mask (255.255.255.0). Also specify number of hosts (10 or 20)</p>
           </form>
         </div>
         <!-- ===== FORM END ===== -->
 
+        <!--Table Update Notification-->
+        <div class="notification">
+          <span class="notify-icon"><i class="fa-solid fa-check"></i></span>
+          <span class="notify_message"></span>
+        </div>
+
+        <!--Export button-->
         <div class="table-button-container">
             <button class="btn-export" type="submit">Export as CSV</button>
         </div>

@@ -1,5 +1,4 @@
 
-
 /*** ===== SUBNET CALCULATOR INTERACTION ===== ***/
 const form = document.querySelector('.panel');
 const tableBody = document.querySelector('.table tbody'); // target your table body
@@ -86,6 +85,29 @@ if (form && tableBody) {
             document.querySelector('.error-hosts').style.display = 'none';
         }
 
+
+        //Table update notification
+        const form_btn = document.querySelector('.btn')
+        const notification =  document.querySelector('.notification')
+        const notify_message =  document.querySelector('.notify_message')
+    
+
+        if(ipAddress && subnetMaskValue && form_btn){
+            notify_message.textContent = 'Table updated successfully';
+            notification.style.display = 'flex';
+        }
+
+    
+        //Hide notification after 3 seconds
+        setTimeout(() => {
+            notification.classList.add('hide');
+            setTimeout(() => {
+                notification.style.display = 'none';
+                //notify_icon.style.display = 'none';
+                notification.classList.remove('hide');
+            }, 300); // Match this duration with the CSS animation duration
+        }, 3000)
+        
         
 
         // Send data to Flask API
