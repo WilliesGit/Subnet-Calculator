@@ -59,15 +59,6 @@ if (form && tableBody) {
             document.querySelector('.error-cidr').style.display = 'none';
 
         }
-
-        setTimeout(() => {
-           const form_btn = document.querySelector('.btn')
-
-            if(ipAddress && subnetMaskValue && form_btn){
-                const notify_btn =  document.querySelector('.notification')
-                notify_btn.style.display = 'block'
-            } 
-        })
         
         //Table update notification
         const form_btn = document.querySelector('.btn')
@@ -78,7 +69,6 @@ if (form && tableBody) {
         if(ipAddress && subnetMaskValue && form_btn){
             notify_message.textContent = 'Table updated successfully';
             notification.style.display = 'flex';
-           // notify_icon.style.display = 'inline-block';
         }
 
     
