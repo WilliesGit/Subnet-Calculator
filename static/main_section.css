@@ -348,6 +348,75 @@ p {
 }
 
 
+/*
+
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+   transition: opacity 0.75s, visibility 0.75s;
+  }
+
+  .loader-container {
+    position: relative; /* For proper positioning of ::after 
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    background: #f3f4f6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .loader-hidden{
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .loader-container::after{
+    content: "";
+    width: 60px;
+    height: 60px;
+    border: 10px solid #dddddd;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: loading 0.7s ease infinite;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: #374151;
+    font-weight: 500;
+    text-align: center;
+    margin: 0; /* Remove default margin 
+  }
+
+
+
+  @keyframes loading {
+  
+    from{
+      transform: rotate(0turn);
+    }
+
+    to{
+      transform: rotate(1turn);
+    }
+  }
+
+*/
+
+
 /* =========================
    RESPONSIVE MAIN SECTION
 ========================= */
