@@ -4,6 +4,10 @@
 const form = document.querySelector('.panel');
 const tableBody = document.querySelector('.table tbody'); // target your table body
 
+const loader_container = document.querySelector('.loader_container')
+    
+loader_container.classList.add('.loader-hidden');
+
 if (form && tableBody) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault(); // prevent normal page reload
@@ -64,12 +68,18 @@ if (form && tableBody) {
         const form_btn = document.querySelector('.btn')
         const notification =  document.querySelector('.notification')
         const notify_message =  document.querySelector('.notify_message')
-    
+        
 
         if(ipAddress && subnetMaskValue && form_btn){
             notify_message.textContent = 'Table updated successfully';
             notification.style.display = 'flex';
+            
         }
+
+        else{
+            loader_hidden.classList.remove('.loader-hidden');
+        }
+
 
     
         //Hide notification after 3 seconds
