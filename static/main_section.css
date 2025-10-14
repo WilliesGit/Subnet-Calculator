@@ -276,7 +276,7 @@ p {
     position: absolute;
     bottom: 0.5rem;
     right: 1.5rem;
-   background:#b0d6b0; /* Green gradient */
+    background:#b0d6b0; /* Green gradient */
    
     padding: 1rem 1.2rem;
    
@@ -359,19 +359,19 @@ p {
     border-radius: 15px;
     background:#80808080; /* 70% transparent very light grey */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.8rem;
     z-index: 1000; /* Ensure it appears above other content */
-    transition: opacity 0.75s, visibility 0.75s;
+    display: none; /* Hidden by default */
   }
 
-/*APPLY JAVASCRIPT FOR THE HIDDEN CLASS*/
-  .loader-hidden{
-    opacity: 0;
-    visibility: hidden;
+/*APPLY JAVASCRIPT FOR LOADER*/
+  .loader-show{
+    opacity: 0.75s ease infinite;
+    visibility: 0.75s ease infinite;
+    display: flex;
   }
 
   .spinner{

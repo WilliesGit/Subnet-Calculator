@@ -4,9 +4,7 @@
 const form = document.querySelector('.panel');
 const tableBody = document.querySelector('.table tbody'); // target your table body
 
-const loader_container = document.querySelector('.loader_container')
-    
-loader_container.classList.add('.loader-hidden');
+
 
 if (form && tableBody) {
     form.addEventListener('submit', async (e) => {
@@ -68,18 +66,19 @@ if (form && tableBody) {
         const form_btn = document.querySelector('.btn')
         const notification =  document.querySelector('.notification')
         const notify_message =  document.querySelector('.notify_message')
+        const loader_container = document.querySelector('.loader-container');
         
 
         if(ipAddress && subnetMaskValue && form_btn){
             notify_message.textContent = 'Table updated successfully';
+
             notification.style.display = 'flex';
             
+            loader_container.classList.add('loader-show');
+                
         }
 
-        else{
-            loader_hidden.classList.remove('.loader-hidden');
-        }
-
+        //NEED TO HIDE LOADER AFTER FETCH IS DONE
 
     
         //Hide notification after 3 seconds
@@ -91,7 +90,15 @@ if (form && tableBody) {
                 notification.classList.remove('hide');
             }, 300); // Match this duration with the CSS animation duration
         }, 3000)
+
+ 
+       
+
+        //transition: opacity 0.75s, visibility 0.75s;
+  
         
+       
+                
         
 
         // Send data to Flask API
