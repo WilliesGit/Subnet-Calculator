@@ -70,26 +70,22 @@ if (form && tableBody) {
         
 
         if(ipAddress && subnetMaskValue && form_btn){
-            notify_message.textContent = 'Table updated successfully';
-
-            notification.style.display = 'flex';
-            
             loader_container.classList.add('loader-show');
-                
         }
 
-        //NEED TO HIDE LOADER AFTER FETCH IS DONE
 
-    
+        //NEED TO HIDE LOADER AFTER FETCH IS DONE
+        /*
         //Hide notification after 3 seconds
         setTimeout(() => {
             notification.classList.add('hide');
+            loader_container.classList.remove('loader-show');
             setTimeout(() => {
                 notification.style.display = 'none';
                 //notify_icon.style.display = 'none';
                 notification.classList.remove('hide');
             }, 300); // Match this duration with the CSS animation duration
-        }, 3000)
+        }, 3000)*/
 
  
        
@@ -119,7 +115,48 @@ if (form && tableBody) {
                 return;
             }
 
-            // Clear existing rows
+            // Show loader for minimum 1.5 seconds to feel responsive
+            setTimeout(() => {
+                // Start fade out animation
+                loader_container.classList.add('loader-hide');
+                loader_container.classList.remove('loader-show');
+                
+                // Wait for fade-out animation to complete (750ms)
+                setTimeout(() => {
+                    // Hide loader completely after fade-out
+                    loader_container.classList.remove('loader-hide');
+                    
+                    // Clear existing rows
+                    tableBody.innerHTML = '';
+
+                    // Insert new row with returned values
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${result.network_address}</td>
+                        <td>${result.broadcast_address}</td>
+                        <td>${result.first_address}</td>
+                        <td>${result.last_address}</td>
+                    `;
+                    tableBody.appendChild(row);
+
+                    // Show notification immediately after table update
+                    notify_message.textContent = 'Table updated successfully';
+                    notification.style.display = 'flex';
+                    
+                    // Hide notification after 2.5 seconds (shorter for better UX)
+                    setTimeout(() => {
+                        notification.classList.add('hide');
+                        setTimeout(() => {
+                            notification.style.display = 'none';
+                            notification.classList.remove('hide');
+                        }, 300); // Match CSS animation duration
+                    }, 2500);
+                    
+                }, 750); // Wait 750ms for loader fade-out animation to complete
+                
+            }, 2000); // Show loader for 1.5 seconds
+
+            /*// Clear existing rows
             tableBody.innerHTML = '';
 
             // Insert new row with returned values
@@ -130,7 +167,7 @@ if (form && tableBody) {
                 <td>${result.first_address}</td>
                 <td>${result.last_address}</td>
             `;
-            tableBody.appendChild(row);
+            tableBody.appendChild(row);*/
 
             // Optional: Scroll table into view after update
             document.querySelector('.table-wrapper').scrollIntoView({ behavior: 'smooth' });

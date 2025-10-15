@@ -364,14 +364,37 @@ p {
     align-items: center;
     gap: 0.8rem;
     z-index: 1000; /* Ensure it appears above other content */
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+    opacity: 0;
+    visibility: hidden;
     display: none; /* Hidden by default */
+  }
+
+ 
+
+  /* Fade out keyframes */
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.9);
+    }
   }
 
 /*APPLY JAVASCRIPT FOR LOADER*/
   .loader-show{
-    opacity: 0.75s ease infinite;
-    visibility: 0.75s ease infinite;
     display: flex;
+    opacity: 1;
+    visibility: visible;
+  
+  }
+
+  /* Class for fade out animation */
+  .loader-hide{
+    animation: fadeOut 0.75s ease forwards;
   }
 
   .spinner{
