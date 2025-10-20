@@ -71,30 +71,7 @@ if (form && tableBody) {
 
         if(ipAddress && subnetMaskValue && form_btn){
             loader_container.classList.add('loader-show');
-        }
-
-
-        //NEED TO HIDE LOADER AFTER FETCH IS DONE
-        /*
-        //Hide notification after 3 seconds
-        setTimeout(() => {
-            notification.classList.add('hide');
-            loader_container.classList.remove('loader-show');
-            setTimeout(() => {
-                notification.style.display = 'none';
-                //notify_icon.style.display = 'none';
-                notification.classList.remove('hide');
-            }, 300); // Match this duration with the CSS animation duration
-        }, 3000)*/
-
- 
-       
-
-        //transition: opacity 0.75s, visibility 0.75s;
-  
-        
-       
-                
+        }        
         
 
         // Send data to Flask API
@@ -155,19 +132,6 @@ if (form && tableBody) {
                 }, 750); // Wait 750ms for loader fade-out animation to complete
                 
             }, 2000); // Show loader for 1.5 seconds
-
-            /*// Clear existing rows
-            tableBody.innerHTML = '';
-
-            // Insert new row with returned values
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${result.network_address}</td>
-                <td>${result.broadcast_address}</td>
-                <td>${result.first_address}</td>
-                <td>${result.last_address}</td>
-            `;
-            tableBody.appendChild(row);*/
 
             // Optional: Scroll table into view after update
             document.querySelector('.table-wrapper').scrollIntoView({ behavior: 'smooth' });
