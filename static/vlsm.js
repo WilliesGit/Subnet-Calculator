@@ -79,30 +79,12 @@ if (form && tableBody) {
         const form_btn = document.querySelector('.btn')
         const notification =  document.querySelector('.notification')
         const notify_message =  document.querySelector('.notify_message')
+        const loader_container = document.querySelector('.loader-container');
     
 
         if(ipAddress && subnetMaskValue && form_btn){
-            notify_message.textContent = 'Table updated successfully';
-            notification.style.display = 'flex';
+            loader_container.classList.add('loader-show');
         }
-
-    
-        //Hide notification after 3 seconds
-        setTimeout(() => {
-            notification.classList.add('hide');
-            setTimeout(() => {
-                notification.style.display = 'none';
-                //notify_icon.style.display = 'none';
-                notification.classList.remove('hide');
-            }, 300); // Match this duration with the CSS animation duration
-        }, 3000)
-        
-
-
-
-        
-
-    
 
 
 
@@ -126,27 +108,61 @@ if (form && tableBody) {
                 return;
             }
 
-            // Clear existing rows
-            tableBody.innerHTML = '';
+           
 
-            if (result.subnets && result.subnets.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="5" class="p-2 border text-red-600">No subnets generated.</td></tr>`;
-                return;
-            }
+            // Show loader for minimum 1.5 seconds to feel responsive
+            setTimeout(() => {
+                // Start fade out animation
+                loader_container.classList.add('loader-hide');
+                loader_container.classList.remove('loader-show');
+                
+                // Wait for fade-out animation to complete (750ms)
+                setTimeout(() => {
+                    // Hide loader completely after fade-out
+                    loader_container.classList.remove('loader-hide');
+                    
+                   
+                    // Clear existing rows
+                    tableBody.innerHTML = '';
 
-            // Update table with new subnet data
-            result.subnets.forEach(subnet => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${subnet.subnet}</td>
-                    <td>${subnet.network}</td>
-                    <td>${subnet.broadcast}</td>
-                    <td>${subnet.first}</td>
-                    <td>${subnet.last}</td>
-                    <td>${subnet.hosts}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+                    if (result.subnets && result.subnets.length === 0) {
+                        tableBody.innerHTML = `<tr><td colspan="5" class="p-2 border text-red-600">No subnets generated.</td></tr>`;
+                        return;
+                    }
+
+                    // Update table with new subnet data
+                    result.subnets.forEach(subnet => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${subnet.subnet}</td>
+                            <td>${subnet.network}</td>
+                            <td>${subnet.broadcast}</td>
+                            <td>${subnet.first}</td>
+                            <td>${subnet.last}</td>
+                            <td>${subnet.hosts}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+
+                    // Show notification immediately after 
+                    // table update
+                    notify_message.textContent = 'Table updated successfully';
+                    notification.style.display = 'flex';
+                    
+                    // Hide notification after 2.5 seconds (shorter for better UX)
+                    setTimeout(() => {
+                        notification.classList.add('hide');
+                        setTimeout(() => {
+                            notification.style.display = 'none';
+                            notification.classList.remove('hide');
+                        }, 300); // Match CSS animation duration
+                    }, 2500);
+                    
+                }, 750); // Wait 750ms for loader fade-out animation to complete
+                
+            }, 2000); // Show loader for 1.5 seconds
+
+
 
             // Optional: Scroll table into view after update
             document.querySelector('.table-wrapper').scrollIntoView({ behavior: 'smooth' });
