@@ -144,7 +144,8 @@ if (form && tableBody) {
                         tableBody.appendChild(row);
                     });
 
-                    // Show notification immediately after table update
+                    // Show notification immediately after 
+                    // table update
                     notify_message.textContent = 'Table updated successfully';
                     notification.style.display = 'flex';
                     
