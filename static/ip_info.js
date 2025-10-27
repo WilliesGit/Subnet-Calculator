@@ -17,25 +17,23 @@ if (form && tableBody) {
         const ipAddress = ipInput.value.trim();
         const subnetMaskValue = subnetMask.value.trim();
 
+
+        const hint_text =  document.querySelector('.hint')
      
 
         
         // Basic validation: ensure fields aren't empty
-        if(!ipAddress && !subnetMaskValue){
-           const hint_text =  document.querySelector('.hint')
-           hint_text.style.color = 'red';
-           hint_text.style.border = '1px solid #f5a5a5';
-           hint_text.style.borderRadius = '3px';
-           hint_text.style.backgroundColor = '#ebc8d0ff';
-           hint_text.style.padding = '8px 10px';
-           return;
-        }
-        else{
-            const hint_text =  document.querySelector('.hint')
-            hint_text.style.color = '#475569';
-            hint_text.style.border = 'none';
-            hint_text.style.backgroundColor = 'transparent';
-            hint_text.classList.remove('red')
+        if (!ipAddress && !subnetMaskValue) {
+            if (hint_text) {
+                hint_text.classList.add('hint_warning');
+                hint_text.classList.remove('hint_reset');
+            }
+            return;
+        } else {
+            if (hint_text) {
+                hint_text.classList.remove('hint_warning');
+                hint_text.classList.add('hint_reset');
+            }
         }
 
         if (!ipAddress) {
